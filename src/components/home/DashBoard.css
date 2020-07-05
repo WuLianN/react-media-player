@@ -1,0 +1,13 @@
+.dashBoard{
+    width: 1020px;
+    height: 550px;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.dashBoard-content{
+    width: 820px;
+    height: 550px;
+    overflow: auto;
+    /* background: #000; */
+}
