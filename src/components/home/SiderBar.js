@@ -4,9 +4,10 @@ import { Menu } from 'antd';
 import { VideoCameraOutlined, UsergroupDeleteOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import { createFromIconfontCN } from '@ant-design/icons';
+import { iconFontUrl } from '../../utils/config'
 
 const IconFont = createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1924409_ueoh9oxf3x.js', // 在 iconfont.cn 上生成
+    scriptUrl: iconFontUrl, // 在 iconfont.cn 上生成
 });
 
 const { SubMenu } = Menu;
@@ -46,6 +47,7 @@ class Sider extends React.Component {
             <Menu
                 mode="inline"
                 openKeys={this.state.openKeys}
+                defaultSelectedKeys={['1']}
                 onOpenChange={this.onOpenChange}
                 style={{ width: 200 }}
             >
@@ -79,10 +81,12 @@ class Sider extends React.Component {
                             <span>视频</span>
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="5"><Link to={"/friends"}>
-                        <UsergroupDeleteOutlined />
-                        <span>朋友</span>
-                    </Link></Menu.Item>
+                    <Menu.Item key="5">
+                        <Link to={"/friends"}>
+                            <UsergroupDeleteOutlined />
+                            <span>朋友</span>
+                        </Link>
+                    </Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub2" icon={<IconFont type="iconQQmusic" />} title="QQ 音乐">
                     <Menu.Item key="6">

@@ -2,6 +2,7 @@ import React from "react"
 import SiderBar from "./SiderBar"
 import "./DashBoard.css"
 import Found from "../../views/Found"
+import SongList from '../../views/SongList'
 
 import {
     BrowserRouter as Router,
@@ -31,6 +32,11 @@ export default function DashBoard() {
                         </Route>
                         <Route path={"/videos"}>
                             videos
+                        </Route>
+                        
+                        {/* 歌单 */}
+                        <Route path={"/songList/:id"}>
+                            <SongList />
                         </Route>
                     </Switch>
                 </div>

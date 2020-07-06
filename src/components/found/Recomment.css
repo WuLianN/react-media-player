@@ -1,0 +1,24 @@
+.list {
+    width: 750px;
+    margin: 0 auto;
+}
+
+.list-header{
+   position: relative;
+   width: 100%;
+   height: 40px;
+   border-bottom: 1px solid rgb(225, 225, 256);
+   display: flex;
+   flex-flow: row nowrap;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.list-header-title{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.list-header-more{
+    font-size: 12px;
+}

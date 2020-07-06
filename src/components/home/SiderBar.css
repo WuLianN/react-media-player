@@ -2,5 +2,6 @@
     position: relative;
     width: 200px;
     height: 550px;
-    /* background:gray; */
+    background:rgba(245,245,247, 0.4);
+    border-right: 1px solid rgb(225, 225, 256);
 }
