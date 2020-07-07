@@ -1,20 +1,17 @@
-import api from '../../api/index'
-import { tencent, kuwo } from './common'
+import { tencent, kuwo, wangyiyun } from './common'
 
 export default {
   WY: (id) => {
-    return api.getUrl(id)
+    return `${wangyiyun}/url?id=${id}`
+
   },
 
   QQ: (id) => {
-    return Promise.resolve(
-      `${tencent}/url?id=${id}`
-    )
+    return `${tencent}/url?id=${id}`
+
   },
 
   KW: (id) => {
-    return Promise.resolve(
-      `${kuwo}/url?id=${id}`
-    )
+    return `${kuwo}/url?id=${id}`
   }
 }

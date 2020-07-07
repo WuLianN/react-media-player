@@ -1,15 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
 import api from '../api/index'
 import './SongList.css'
+import { updateSong, updateSongList, updateIdIndex } from "../store/actions"
+import { useDispatch } from "react-redux"
 
 function getSongList(id) {
     return api.getSongList(id)
 }
 
 function Songs(props) {
+    const dispatch = useDispatch()
+
+    function update(item, index, e) {
+        e.preventDefault();
+        let data = { id: item.id, api: item.api }
+        let idIndexData = { idIndex: index }
+        return dispatch(updateSong(data)) && dispatch(updateIdIndex(idIndexData))
+    }
+
     if (props.songs) {
-        return props.songs.map((item, index) => <div className="songs" key={index}>
+        return props.songs.map((item, index) => <div className="songs" key={index} onClick={(e) => update(item, index, e)}>
             <div className="songs-75">{index + 1}</div>
             <div className="songs-75"></div>
             <div className="songs-300">{item.songName}</div>
@@ -24,6 +35,7 @@ function Songs(props) {
 export default function SongList() {
     const [songs, setSongs] = useState(null)
     const { id } = useParams()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         getSongList(id).then(res => {
@@ -52,9 +64,12 @@ export default function SongList() {
                     })
                 })
                 setSongs(purifyRes)
+                // 存储到redux
+                dispatch(updateSongList({songList: purifyRes}))
             })
         })
     }, [])
 
     return (<div><Songs songs={songs} /></div>)
 }
+

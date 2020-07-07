@@ -1,5 +1,5 @@
 /*
- * @Description: In User Settings Edit
+ * @Description: 网易云音乐 NeteaseCloudMusicApi
  * @Author: WuLianN
  * @Date: 2019-08-07 13:59:55
  * @LastEditTime: 2019-10-12 17:58:50
