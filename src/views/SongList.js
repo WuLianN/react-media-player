@@ -3,17 +3,23 @@ import { useParams } from "react-router-dom"
 import api from '../api/index'
 import './SongList.css'
 import { updateSong, updateSongList, updateIdIndex } from "../store/actions"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { formatSec } from '../utils/transform'
 
 function getSongList(id) {
     return api.getSongList(id)
 }
 
+function mapData(arr) {
+    return arr.map((i, index) => <span key={index}>{i.name}{index === arr.length - 1 ? '' : ' / '}</span>)
+}
+
 export default function SongList() {
     const [songs, setSongs] = useState(null)
     const { id } = useParams()
     const dispatch = useDispatch()
+    const { autoIndex } = useSelector(state => state.updateAutoIndex.autoIndex)
+    const { id: songId } = useSelector(state => state.updateSong.song)
 
     useEffect(() => {
         getSongList(id).then(res => {
@@ -34,9 +40,8 @@ export default function SongList() {
                     purifyRes.push({
                         id: item.id,
                         songName: item.name,
-                        artist: item.ar[0].name,
-                        picUrl: item.al.picUrl,
-                        albumName: item.al.name,
+                        artist: item.ar,
+                        album: item.al,
                         api: 'WY',
                         duration: item.dt
                     })
@@ -51,20 +56,22 @@ export default function SongList() {
     function Songs(props) {
         function update(item, index, e) {
             e.preventDefault();
-            let data = { id: item.id, api: item.api }
+            let data = item
             let idIndexData = { idIndex: index }
-            return dispatch(updateSong(data)) && dispatch(updateIdIndex(idIndexData)) &&  dispatch(updateSongList({ songList: songs }))
+            return dispatch(updateSong(data)) && dispatch(updateIdIndex(idIndexData)) && dispatch(updateSongList({ songList: songs }))
         }
 
         if (props.songs) {
-            return props.songs.map((item, index) => <div className="songs" key={index} onClick={(e) => update(item, index, e)}>
+            return props.songs.map((item, index) => <div className="songs" style={index === autoIndex && songId === item.id ? { color: 'red' } : { color: '' }}
+                key={index} onClick={(e) => update(item, index, e)
+                }>
                 <div className="songs-75">{index + 1}</div>
                 <div className="songs-75"></div>
                 <div className="songs-300">{item.songName}</div>
-                <div className="songs-200">{item.artist}</div>
-                <div className="songs-200">{item.albumName}</div>
+                <div className="songs-200">{mapData(item.artist)}</div>
+                <div className="songs-200">{item.album.name}</div>
                 <div className="songs-100">{formatSec(item.duration / 1000)}</div>
-            </div>)
+            </div >)
         }
         return null
     }

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import {
-    UPDATE_SONG, UPDATE_SONGLIST, UPDATE_ID_INDEX, UPDATE_AUTO_INDEX, UPDATE_AUDIO_STATUS, USER_CONTROL_AUDIO
+    UPDATE_SONG, UPDATE_SONGLIST, UPDATE_ID_INDEX, UPDATE_AUTO_INDEX, UPDATE_AUDIO_STATUS, USER_CONTROL_AUDIO, UPDATE_CURRENT_TIME
 } from './actions'
 
 // 更新歌曲
@@ -60,8 +60,8 @@ function updateAudioStatus(state = { audioStatus: 'pause' }, action) {
     switch (action.type) {
         case UPDATE_AUDIO_STATUS.PLAY:
             return {
-               state,
-               audioStatus: action.playload
+                state,
+                audioStatus: action.playload
             }
         case UPDATE_AUDIO_STATUS.PAUSE:
             return {
@@ -79,13 +79,26 @@ function userControlAudio(state = { userControl: '' }, action) {
         case USER_CONTROL_AUDIO.USER:
             console.log(action.playload)
             return {
-               state,
-               userControl: action.playload
+                state,
+                userControl: action.playload
             }
         case USER_CONTROL_AUDIO.DEFAULT:
             return {
                 state,
                 userControl: action.playload
+            }
+        default:
+            return state
+    }
+}
+
+// 更新歌曲当前进度
+function updateCurrentTime(state = { currentTime: '' }, action) {
+    switch (action.type) {
+        case UPDATE_CURRENT_TIME:
+            return {
+                state,
+                currentTime: action.playload
             }
         default:
             return state
@@ -100,7 +113,8 @@ const reducers = combineReducers({
     updateIdIndex,
     updateAutoIndex,
     updateAudioStatus,
-    userControlAudio
+    userControlAudio,
+    updateCurrentTime
 })
 
 export default reducers

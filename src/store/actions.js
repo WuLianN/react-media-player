@@ -15,6 +15,9 @@ export const USER_CONTROL_AUDIO = { // 手动控制 音乐播放器状态 （播
     DEFAULT: false
 }
 
+export const UPDATE_CURRENT_TIME = 'UPDATE_CURRENT_TIME' // 更新歌曲当前进度
+
+
 
 /*
  * action creators   
@@ -50,4 +53,8 @@ export function userControlAudio(playload) {
     }else{
        return {type: USER_CONTROL_AUDIO.DEFAULT, playload }
     }
+}
+
+export function updateCurrentTime(playload){
+    return { type: UPDATE_CURRENT_TIME, playload}
 }

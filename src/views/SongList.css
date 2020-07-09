@@ -11,6 +11,7 @@
   position: relative;
   width: 75px;
   height: 100%;
+  font-size: 14px;
 }
 
 .songs-100{
@@ -24,10 +25,12 @@
     position: relative;
     width: 200px;
     height: 100%;
+    font-size: 14px;
 }
 
 .songs-300{
     position: relative;
     width: 300px;
     height: 100%;
+    font-size: 14px;
 }
