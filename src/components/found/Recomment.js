@@ -1,29 +1,21 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import api from '../../api/index'
 import { SnippetRecommentList, SnippetNewSong, SnippetRadio, SnippetRecommentMv, SnippetExclusive } from './index'
 import './Recomment.css'
 import { createFromIconfontCN } from '@ant-design/icons';
 import { iconFontUrl } from '../../utils/config'
 
+import { ActiveKeyContext, listData } from '../../views/Found'
+
 const IconFont = createFromIconfontCN({
    scriptUrl: iconFontUrl, // 在 iconfont.cn 上生成
 });
-
-const listData = [
-   { title: "推荐歌单", component: "RecommentList", id: 1 },
-   { title: "独家放送", component: "Exclusive", id: 2 },
-   { title: "最新音乐", component: "NewSong", id: 3 },
-   { title: "推荐MV", component: "RecommentMv", id: 4 },
-   { title: "主播电台", component: "Radio", id: 5 },
-   // { title: "听听", component: "Listen" , id: 6 },
-   // { title: "看看", component: "Look" , id: 7 }
-]
 
 function getBanner() {
    return api.getBanner(0)
 }
 
-function Banner(props) {
+function Banner() {
    return (
       <div className="banner"></div>
    )
@@ -49,11 +41,12 @@ function switchList(name) {
 }
 
 function List() {
+   const updateActiveKey = useContext(ActiveKeyContext)
    return listData.map(item =>
       <div className="list" key={item.id}>
          <div className="list-header">
             <span className="list-header-title">{item.title}</span>
-            <span className="list-header-more">
+            <span className="list-header-more" onClick={() => updateActiveKey(item.id)}>
                更多
                <IconFont type="iconyoujiantou" />
             </span>

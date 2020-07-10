@@ -4,14 +4,10 @@ import api from '../api/index'
 import './SongList.css'
 import { updateSong, updateSongList, updateIdIndex } from "../store/actions"
 import { useDispatch, useSelector } from "react-redux"
-import { formatSec } from '../utils/transform'
+import { formatSec, mapArtist } from '../utils/transform'
 
 function getSongList(id) {
     return api.getSongList(id)
-}
-
-function mapData(arr) {
-    return arr.map((i, index) => <span key={index}>{i.name}{index === arr.length - 1 ? '' : ' / '}</span>)
 }
 
 export default function SongList() {
@@ -49,8 +45,6 @@ export default function SongList() {
                 setSongs(purifyRes)
             })
         })
-
-
     }, [])
 
     function Songs(props) {
@@ -68,14 +62,13 @@ export default function SongList() {
                 <div className="songs-75">{index + 1}</div>
                 <div className="songs-75"></div>
                 <div className="songs-300">{item.songName}</div>
-                <div className="songs-200">{mapData(item.artist)}</div>
+                <div className="songs-200">{mapArtist(item.artist)}</div>
                 <div className="songs-200">{item.album.name}</div>
                 <div className="songs-100">{formatSec(item.duration / 1000)}</div>
             </div >)
         }
         return null
     }
-
 
     return (<div><Songs songs={songs} /></div>)
 }

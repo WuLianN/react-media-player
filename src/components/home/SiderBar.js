@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SiderBar.css"
 import { Menu } from 'antd';
 import { VideoCameraOutlined, UsergroupDeleteOutlined } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { createFromIconfontCN } from '@ant-design/icons';
 import { iconFontUrl } from '../../utils/config'
 
@@ -13,6 +13,12 @@ const IconFont = createFromIconfontCN({
 const { SubMenu } = Menu;
 
 export default function SiderBar() {
+    const history = useHistory()
+
+    useEffect(() => {
+        history.push('/found')
+    }, [])
+
     return (
         <div className="siderBar">
 
@@ -64,17 +70,20 @@ class Sider extends React.Component {
                         <Link to={"/found"}>
                             <IconFont type="iconmusic_filledx" />
                             <span>发现音乐</span>
-                        </Link></Menu.Item>
+                        </Link>
+                    </Menu.Item>
                     <Menu.Item key="2">
                         <Link to={"/private"}>
                             <IconFont type="iconradio" />
                             <span>私人FM</span>
-                        </Link></Menu.Item>
+                        </Link>
+                    </Menu.Item>
                     <Menu.Item key="3">
                         <Link to={"/live"}>
                             <IconFont type="iconLivelinkBI" />
                             <span>LOOK直播</span>
-                        </Link></Menu.Item>
+                        </Link>
+                    </Menu.Item>
                     <Menu.Item key="4">
                         <Link to={"/videos"}>
                             <VideoCameraOutlined />

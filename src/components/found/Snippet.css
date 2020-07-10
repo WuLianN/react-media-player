@@ -1,0 +1,61 @@
+.recommentList-wrap{
+    position: relative;
+    width: 100%;
+    margin: 20px 0 0 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+ }
+ 
+ .recommentlist {
+    width: 135px;
+    height: 200px;
+    position: relative;
+    cursor: pointer;
+ }
+ 
+ .recommentlist-img{
+     position: relative;
+     width: 100%;
+     height: 135px;
+ }
+ 
+ .recommentList-title{
+     width: 100%;
+     font-size: 13px;
+ }
+
+.exclusive{
+  width: 100%;
+  height: 240px;
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.exclusive-video{
+    width: 230px;
+    height: 240px;
+    position: relative;
+    cursor: pointer;
+}
+
+.exclusive-video-img{
+    width: 230px;
+    height: 150px;
+}
+
+.exclusive-video-mark{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid white;
+    background: rgba(32, 30, 30, 0.385);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

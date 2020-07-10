@@ -8,8 +8,8 @@ export default function Header() {
     return (
         <div className="header">
             <div className="header-logo">
-                <img className="header-logo-img" src={neteaseLogo} />
-                <img className="header-logo-img" src={qqLogo} />
+                <img className="header-logo-img" src={neteaseLogo}  alt="网易云"/>
+                <img className="header-logo-img" src={qqLogo} alt="qq" />
             </div>
         </div>
     )

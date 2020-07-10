@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import platform from '../api/config/platform'
 import { updateAutoIndex, updateAudioStatus, userControlAudio, updateCurrentTime, updateSong } from "../store/actions";
@@ -20,24 +20,15 @@ export default function Audio(props) {
     const dispatch = useDispatch()
     const audio = useRef(null)
 
-    const volume = props.volume
-    const loop = props.loop
-    const mode = props.mode
+    const volume = props.volume // 音量
+    const loop = props.loop // 单曲循环
+    const mode = props.mode // 播放模式
 
-    // 控制音量 footer -> audio
     useEffect(() => {
-        if (audio) {
-            audio.current.volume = props.volume
+        if (id) {
+            play(id, api, audio)
         }
-    }, [volume])
-
-    // 控制播放方式
-    useEffect(() => {
-        if (audio) {
-            audio.current.loop = loop
-        }
-    }, [loop])
-
+    }, [id])
 
     useEffect(() => {
         // 获得当前歌曲的索引 -> 更新autoIndex
@@ -74,14 +65,14 @@ export default function Audio(props) {
             }
 
             audio.current.onerror = () => {
-                if(audio.current.networkState === 3) { // 3 = NETWORK_NO_SOURCE - 未找到音频/视频来源
-                   console.log('没有音乐资源')
-                   // 要进行判断有没有歌单 -> 播放下一首歌
-                   if(songList.length > 1){
-                       getNextSong(autoIndex, songList, mode)
-                   }else{
-                       // 弹窗
-                   }
+                if (audio.current.networkState === 3) { // 3 = NETWORK_NO_SOURCE - 未找到音频/视频来源
+                    console.log('没有音乐资源')
+                    // 要进行判断有没有歌单 -> 播放下一首歌
+                    if (songList.length > 1) {
+                        getNextSong(autoIndex, songList, mode)
+                    } else {
+                        // 弹窗
+                    }
                 }
 
                 // console.log(audio.current.networkState) // 网络状态
@@ -91,12 +82,21 @@ export default function Audio(props) {
         }
     }, [autoIndex])
 
+    // 控制音量 footer -> audio
     useEffect(() => {
-        if (id) {
-            play(id, api, audio)
+        if (audio) {
+            audio.current.volume = props.volume
         }
-    }, [id])
+    }, [volume])
 
+    // 单曲循环 footer -> audio
+    useEffect(() => {
+        if (audio) {
+            audio.current.loop = loop
+        }
+    }, [loop])
+
+    // 手势控制 播放/暂停
     useEffect(() => {
         if (audioStatus === 'play' && userControl) {
             audio.current.play()
@@ -106,11 +106,13 @@ export default function Audio(props) {
             dispatch(userControlAudio({ userControl: false }))
         }
     }, [audioStatus])
-
+    
+    // 获取下一首 + 播放模式（列表循环、随机播放）
     function getNextSong(autoIndex, songList, mode) {
         if (songList && autoIndex && mode) {
             let nextIndex
             if (mode === 'songListLoop') {
+                // 列表循环
                 nextIndex = autoIndex + 1
                 // 重新播放
                 if (nextIndex === songList.length) {
@@ -118,6 +120,7 @@ export default function Audio(props) {
                     nextIndex = 0
                 }
             } else if (mode === 'random') {
+                // 随机播放
                 const songListLength = songList.length
                 const randomIndex = Math.floor(Math.random() * songListLength)
                 if (randomIndex !== autoIndex) {
@@ -135,4 +138,18 @@ export default function Audio(props) {
 
     return <audio ref={audio} autoPlay></audio>
 }
+
+/**
+ *  audio 的逻辑 
+ * 
+ *  初始 -> 数据流向（数据皆存储于 redux）
+ *    1、{ id, api } 的更新 -> 播放音乐
+ *    2、idIndex 的更新 -> 分发更新 autoIndex -> 更新 audio 事件函数
+ *  
+ *  例子
+ *    点击歌单中的歌曲，播放音乐 -> 更新 { id, api } 、idIndex
+ *    播放模式(列表、单曲、随机)、自动播放下一曲 -> idIndex -> autoIndex -> audio 事件函数
+ *
+ */
+
 

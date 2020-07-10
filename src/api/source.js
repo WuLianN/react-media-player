@@ -35,6 +35,9 @@ const api = {
   newSong: `${proxyUrl}/personalized/newsong`, // 推荐新音乐
   topSong: `${proxyUrl}/top/song`, // 新歌速递
   topList: `${proxyUrl}/toplist`, // 所有榜单
+  snippetExclusiveVideo: `${proxyUrl}/personalized/privatecontent`, // 独家放送(入口列表)
+  exclusiveVideo: `${proxyUrl}/personalized/privatecontent/list` // 独家放送列表
+
 }
 
 export const search = api.search
@@ -63,3 +66,5 @@ export const topAlbum = api.topAlbum
 export const newSong = api.newSong
 export const topSong = api.topSong
 export const topList = api.topList
+export const snippetExclusiveVideo = api.snippetExclusiveVideo
+export const exclusiveVideo = api.exclusiveVideo

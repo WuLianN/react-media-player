@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import api from '../../api/index'
-import './SnippetRecommentList.css'
+import './Snippet.css'
 import { useHistory } from "react-router-dom";
 
 function getRecommentList() {
