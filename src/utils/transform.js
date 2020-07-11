@@ -67,3 +67,11 @@ export function snippet17(value) {
 export function mapArtist(arr) {
   return arr.map((i, index) => <span key={index}>{i.name}{index === arr.length - 1 ? '' : ' & '}</span>)
 }
+
+export function addZero(index) {
+  if (index < 10) {
+    return `0${index}`
+  } else {
+    return index
+  }
+}

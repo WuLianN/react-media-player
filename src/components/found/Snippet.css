@@ -1,52 +1,53 @@
-.recommentList-wrap{
+.recommentList-wrap {
     position: relative;
     width: 100%;
     margin: 20px 0 0 0;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
- }
- 
- .recommentlist {
+}
+
+.recommentlist {
     width: 135px;
     height: 200px;
     position: relative;
     cursor: pointer;
- }
- 
- .recommentlist-img{
-     position: relative;
-     width: 100%;
-     height: 135px;
- }
- 
- .recommentList-title{
-     width: 100%;
-     font-size: 13px;
- }
-
-.exclusive{
-  width: 100%;
-  height: 240px;
-  position: relative;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
 }
 
-.exclusive-video{
+.recommentlist-img {
+    position: relative;
+    width: 100%;
+    height: 135px;
+}
+
+.recommentList-title {
+    width: 100%;
+    font-size: 13px;
+}
+
+.exclusive {
+    width: 100%;
+    height: 240px;
+    margin: 20px 0 0 0;
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.exclusive-video {
     width: 230px;
     height: 240px;
     position: relative;
     cursor: pointer;
 }
 
-.exclusive-video-img{
+.exclusive-video-img {
     width: 230px;
     height: 150px;
 }
 
-.exclusive-video-mark{
+.exclusive-video-mark {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -58,4 +59,80 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.newSong {
+    width: 100%;
+    height: 302px;
+    margin: 20px 0 35px 0;
+    position: relative;
+    display: flex;
+    flex-flow: column wrap;
+    border-top: 1px solid rgb(225, 225, 256);
+    border-left: 1px solid rgb(225, 225, 256);
+}
+
+.newSong-song {
+    position: relative;
+    width: 50%;
+    height: 60px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    border-bottom: 1px solid rgb(225, 225, 256);
+    border-right: 1px solid rgb(225, 225, 256);
+    cursor: pointer;
+}
+
+.newSong-song:hover {
+    background: rgba(227, 227, 229, 1);
+}
+
+.newSong-song-index {
+    width: 30px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.newSong-song-img {
+    width: 40px;
+    height: 40px;
+}
+
+.newSong-song-detail {
+    width: 255px;
+    height: 50px;
+    text-indent: 10px;
+}
+
+.newSong-song-detail-name {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+}
+
+.newSong-song-detail-artist {
+    width: 100%;
+    height: 20px;
+    font-size: 12px;
+}
+
+.new-song-mark {
+    position: absolute;
+    top: 17.5px;
+    left: 37.5px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: rgba(32, 30, 30, 0.385);
+}
+
+.new-song-mark-img {
+    position: relative;
+    display: block;
+    width: 15px;
+    height: 15px;
+    margin: 5px auto;
 }

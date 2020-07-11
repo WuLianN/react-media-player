@@ -19,7 +19,6 @@ export default function Audio(props) {
     const { userControl } = useSelector(state => state.userControlAudio.userControl)
     const dispatch = useDispatch()
     const audio = useRef(null)
-
     const volume = props.volume // 音量
     const loop = props.loop // 单曲循环
     const mode = props.mode // 播放模式
