@@ -9,10 +9,6 @@ import Audio from '../Audio'
 
 
 export default function Footer() {
-    const prev = require('../../assets/player/prev.png')
-    const next = require('../../assets/player/next.png')
-    const pause = require('../../assets/player/pause.png')
-    const play = require('../../assets/player/play.png')
     const laba = require('../../assets/player/laba.png')
     const mute = require('../../assets/player/mute.png')
     const songListLoop = require('../../assets/player/songListLoop.png')
@@ -20,80 +16,13 @@ export default function Footer() {
     const random = require('../../assets/player/random.png')
     const songListLogo = require('../../assets/player/songList.png')
     const dispatch = useDispatch()
-    const { audioStatus } = useSelector(state => state.updateAudioStatus.audioStatus)
     const { songList } = useSelector(state => state.updateSongList.songList)
-    const { autoIndex } = useSelector(state => state.updateAutoIndex.autoIndex)
-    const { duration } = useSelector(state => state.updateSong.song)
-    const { currentTime } = useSelector(state => state.updateCurrentTime.currentTime)
     const { id } = useSelector(state => state.updateSong.song)
-    const imgStatus = useRef(null)
-    const [isMuted, setIsMuted] = useState(false)
     const [volume, setVolume] = useState(1)
     const [loop, setLoop] = useState(false)
     const [reserveLastVolume, setReserveLastVolue] = useState(null)
     const [mode, setMode] = useState('songListLoop')
     const [showSongList, setShowSongList] = useState(false)
-
-
-    useEffect(() => {
-        if (audioStatus === 'play') {
-            imgStatus.current.src = pause
-        } else if (audioStatus === 'pause') {
-            imgStatus.current.src = play
-        }
-    }, [audioStatus])
-
-    // 控制播放状态 播放/暂停
-    function statusControls() {
-        // 检查音乐播放状态
-        if (audioStatus === 'play') {
-            // 请求 暂停 音乐
-            dispatch(updateAudioStatus({ audioStatus: 'pause' }))
-            dispatch(userControlAudio({ userControl: true }))
-        } else if (audioStatus === 'pause') {
-            // 请求 播放 音乐
-            dispatch(updateAudioStatus({ audioStatus: 'play' }))
-            dispatch(userControlAudio({ userControl: true }))
-        }
-    }
-
-    // 上一首
-    function prevSong() {
-        const prevIndex = autoIndex - 1
-        if (prevIndex !== -1) {
-            const { id, api } = songList[prevIndex]
-            const data = { id, api }
-            const idIndexData = { idIndex: prevIndex }
-            dispatch(updateSong(data))
-            dispatch(updateIdIndex(idIndexData))
-        }
-    }
-
-    // 下一首
-    function nextSong() {
-        const nextIndex = autoIndex + 1
-        if (nextIndex !== songList.length) {
-            const { id, api } = songList[nextIndex]
-            const data = { id, api }
-            const idIndexData = { idIndex: nextIndex }
-            dispatch(updateSong(data))
-            dispatch(updateIdIndex(idIndexData))
-        }
-    }
-
-    // 静音
-    function controlMute() {
-        if (isMuted) {
-            setIsMuted(false)
-            // 还原上个volume
-            setVolume(reserveLastVolume)
-        } else {
-            setIsMuted(true)
-            // 备份volume 
-            setReserveLastVolue(volume)
-            setVolume(0)
-        }
-    }
 
     // 音量
     function changeVolume(value) {
@@ -133,10 +62,26 @@ export default function Footer() {
     }
 
     function Volume() {
+        const [isMuted, setIsMuted] = useState(false)
+
+        // 静音
+        function controlMute() {
+            if (isMuted) {
+                setIsMuted(false)
+                // 还原上个volume
+                setVolume(reserveLastVolume)
+            } else {
+                setIsMuted(true)
+                // 备份volume 
+                setReserveLastVolue(volume)
+                setVolume(0)
+            }
+        }
+
         if (isMuted) {
-            return <img onClick={controlMute} className="footer-volume-img" src={mute} alt="喇叭" />
+            return <img onClick={controlMute} className="footer-volume-img" src={mute} alt="静音" />
         } else {
-            return <img onClick={controlMute} className="footer-volume-img" src={laba} alt="静音" />
+            return <img onClick={controlMute}  className="footer-volume-img" src={laba} alt="喇叭" />
         }
     }
 
@@ -160,6 +105,7 @@ export default function Footer() {
     }
 
     function SongList() {
+        const { autoIndex } = useSelector(state => state.updateAutoIndex.autoIndex)
         if (songList) {
             return (<div>
                 <div>播放记录</div>
@@ -177,21 +123,85 @@ export default function Footer() {
         return null
     }
 
+
+    function PlayerControls() {
+        const prev = require('../../assets/player/prev.png')
+        const next = require('../../assets/player/next.png')
+        const pause = require('../../assets/player/pause.png')
+        const play = require('../../assets/player/play.png')
+        const { audioStatus } = useSelector(state => state.updateAudioStatus.audioStatus)
+        const { autoIndex } = useSelector(state => state.updateAutoIndex.autoIndex)
+        const imgStatus = useRef(null)
+
+        useEffect(() => {
+            if (audioStatus === 'play') {
+                imgStatus.current.src = pause
+            } else if (audioStatus === 'pause') {
+                imgStatus.current.src = play
+            }
+        }, [audioStatus, play, pause])
+
+        // 控制播放状态 播放/暂停
+        function statusControls() {
+            // 检查音乐播放状态
+            if (audioStatus === 'play') {
+                // 请求 暂停 音乐
+                dispatch(updateAudioStatus({ audioStatus: 'pause' }))
+                dispatch(userControlAudio({ userControl: true }))
+            } else if (audioStatus === 'pause') {
+                // 请求 播放 音乐
+                dispatch(updateAudioStatus({ audioStatus: 'play' }))
+                dispatch(userControlAudio({ userControl: true }))
+            }
+        }
+
+        // 上一首
+        function prevSong() {
+            const prevIndex = autoIndex - 1
+            if (prevIndex !== -1) {
+                const { id, api } = songList[prevIndex]
+                const data = { id, api }
+                const idIndexData = { idIndex: prevIndex }
+                dispatch(updateSong(data))
+                dispatch(updateIdIndex(idIndexData))
+            }
+        }
+
+        // 下一首
+        function nextSong() {
+            const nextIndex = autoIndex + 1
+            if (nextIndex !== songList.length) {
+                const { id, api } = songList[nextIndex]
+                const data = { id, api }
+                const idIndexData = { idIndex: nextIndex }
+                dispatch(updateSong(data))
+                dispatch(updateIdIndex(idIndexData))
+            }
+        }
+        return <div className="footer-controls">
+            <div className="footer-controls-icon footer-size-small"><img className="footer-controls-img1" onClick={prevSong} src={prev} alt="prev" /></div>
+            <div className="footer-controls-icon footer-size-middle"><img className="footer-controls-img2" onClick={statusControls} ref={imgStatus} src={play} alt="status" /></div>
+            <div className="footer-controls-icon footer-size-small"><img className="footer-controls-img1" onClick={nextSong} src={next} alt="next" /></div>
+        </div>
+    }
+
+    function PlayerDuration() {
+        const { duration } = useSelector(state => state.updateSong.song)
+        const { currentTime } = useSelector(state => state.updateCurrentTime.currentTime)
+
+        return <div className="footer-duration">
+            <span>{currentTime ? formatSec(currentTime) : '00:00'}</span>
+            <Slider className="footer-duration-slider"
+                tipFormatter={formatSec} min={0} max={duration / 1000} value={currentTime}
+            />
+            <span>{duration ? formatSec(duration / 1000) : '00:00'}</span>
+        </div>
+    }
+
     return (
         <div className="footer">
-            <div className="footer-controls">
-                <div className="footer-controls-icon footer-size-small"><img className="footer-controls-img1" onClick={prevSong} src={prev} alt="prev" /></div>
-                <div className="footer-controls-icon footer-size-middle"><img className="footer-controls-img2" onClick={statusControls} ref={imgStatus} src={play} alt="status" /></div>
-                <div className="footer-controls-icon footer-size-small"><img className="footer-controls-img1" onClick={nextSong} src={next} alt="next" /></div>
-            </div>
-
-            <div className="footer-duration">
-                <span>{currentTime ? formatSec(currentTime) : '00:00'}</span>
-                <Slider className="footer-duration-slider"
-                    tipFormatter={formatSec} min={0} max={duration / 1000} value={currentTime}
-                />
-                <span>{duration ? formatSec(duration / 1000) : '00:00'}</span>
-            </div>
+            <PlayerControls />
+            <PlayerDuration />
 
             <div className="footer-volume">
                 <Volume />
@@ -211,8 +221,6 @@ export default function Footer() {
             <div className="footer-songList" style={showSongList ? { display: 'block' } : { display: 'none' }}>
                 <SongList />
             </div>
-
-
 
             <Audio volume={volume} loop={loop} mode={mode} />
         </div>

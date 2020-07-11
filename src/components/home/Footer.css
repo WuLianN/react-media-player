@@ -66,7 +66,7 @@
 
 .footer-volume{
     width: 140px;
-    height: 50xp;
+    height: 50px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
@@ -80,7 +80,7 @@
 
 .footer-volume-slider{
     width: 100px;
-    height: 50xp;
+    height: 50px;
 }
 
 .footer-other-controls {

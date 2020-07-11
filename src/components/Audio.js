@@ -28,7 +28,7 @@ export default function Audio(props) {
         if (id) {
             play(id, api, audio)
         }
-    }, [id])
+    }, [id, api])
 
     useEffect(() => {
         // 获得当前歌曲的索引 -> 更新autoIndex
@@ -85,7 +85,7 @@ export default function Audio(props) {
     // 控制音量 footer -> audio
     useEffect(() => {
         if (audio) {
-            audio.current.volume = props.volume
+            audio.current.volume = volume
         }
     }, [volume])
 

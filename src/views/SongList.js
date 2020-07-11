@@ -45,7 +45,7 @@ export default function SongList() {
                 setSongs(purifyRes)
             })
         })
-    }, [])
+    }, [id])
 
     function Songs(props) {
         function update(item, index, e) {

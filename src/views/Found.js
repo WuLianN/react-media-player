@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Tabs } from 'antd';
 import { Recomment, Songer, SongList, RankList, Radio, NewSong } from '../components/found/index'
 
