@@ -1,5 +1,3 @@
-import React from "react"
-
 /**
  * @description: 格式化秒数
  * @param {type}
@@ -65,8 +63,8 @@ export function snippet17(value) {
 
 // ['刘德华', '张学友'] -> 刘德华 & 张学友
 export function mapArtist(arr) {
-  return arr.map((i, index) => <span key={index}>{i.name}{index === arr.length - 1 ? '' : ' & '}</span>)
-}
+  return arr.map((i, index) => `${i.name}${index === arr.length - 1 ? '' : ' & '}`
+  )}
 
 export function addZero(index) {
   if (index < 10) {

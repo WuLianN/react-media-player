@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./SiderBar.css"
 import { Menu } from 'antd';
 import { VideoCameraOutlined, UsergroupDeleteOutlined } from '@ant-design/icons';
 import { Link, useHistory } from "react-router-dom";
 import { createFromIconfontCN } from '@ant-design/icons';
 import { iconFontUrl } from '../../utils/config'
+import { useSelector } from 'react-redux'
+import { mapArtist } from '../../utils/transform'
+import SongDetail from '../../views/SongDetail'
 
 const IconFont = createFromIconfontCN({
     scriptUrl: iconFontUrl, // 在 iconfont.cn 上生成
@@ -21,11 +24,46 @@ export default function SiderBar() {
 
     return (
         <div className="siderBar">
-
             <Sider />
-
+            <Player />
         </div>
     )
+}
+
+function Player() {
+    const { id, picUrl, artist, songName } = useSelector(state => state.updateSong.song)
+    const markImg = require('../../assets/player/enlarge.png')
+    const [isShowImg, setIsShowImg] = useState(false)
+    const [isShowSongDetail, setIsShowSongDetail] = useState(false)
+
+    function showMask(bool) {
+        setIsShowImg(bool)
+    }
+
+    function showSongDetail(bool) {
+        setIsShowSongDetail(bool)
+    }
+
+    if (songName || artist || picUrl) {
+        return <div className="player">
+            <img className="player-img" src={picUrl} alt={songName}
+                onMouseEnter={() => showMask(true)}
+                onMouseLeave={() => showMask(false)}
+            />
+            <div className="player-mark" onClick={() => showSongDetail(true)} style={isShowImg ? { display: 'block' } : { display: 'none' }}>
+                <img src={markImg} className="player-mark-img" /></div>
+            <div className="player-detail">
+                <div className="player-detail-name" onClick={() => showSongDetail(true)}>{songName}</div>
+                <div className="player-detail-artist">{mapArtist(artist)}</div>
+            </div>
+
+            <div style={isShowSongDetail ? { display: 'block' } : { display: 'none' }} className="player-songDetail">
+                <SongDetail showSongDetail={showSongDetail} />
+            </div>
+        </div>
+    }
+
+    return null
 }
 
 

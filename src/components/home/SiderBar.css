@@ -2,6 +2,69 @@
     position: relative;
     width: 200px;
     height: 550px;
-    background:rgba(245,245,247, 0.4);
+    background: rgba(245, 245, 247, 0.4);
     border-right: 1px solid rgb(225, 225, 256);
+}
+
+.player {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+    height: 55px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-around;
+    border-top: 1px solid rgb(225, 225, 256);
+    padding: 0 0 0 8px;
+    cursor: pointer;
+}
+
+.player-img {
+    width: 45px;
+    height: 45px;
+}
+
+.player-mark {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    width: 45px;
+    height: 45px;
+    background: rgba(32, 30, 30, 0.385);
+}
+
+.player-mark-img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.player-detail {
+    width: 140px;
+    height: 40px;
+}
+
+.player-detail-name {
+    width: 100%;
+    height: 20px;
+    font-size: 14px;
+}
+
+.player-detail-artist {
+    width: 100%;
+    height: 20px;
+    font-size: 10px;
+    line-height: 20px;
+}
+
+.player-songDetail{
+    position: absolute;
+    top: -500px;
+    left: 0;
+    width: 1020px;
+    height: 554px;
+    z-index: 100;
+    background: white;
 }

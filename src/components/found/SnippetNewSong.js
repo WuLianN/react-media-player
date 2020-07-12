@@ -49,7 +49,7 @@ export function SnippetNewSong() {
                     <div className="newSong-song-detail-artist">{mapArtist(item.artist)}</div>
                 </div>
 
-                <div className="new-song-mark"><img className="new-song-mark-img" src={play} /></div>
+                <div className="new-song-mark"><img className="new-song-mark-img" src={play} alt="mark" /></div>
             </div>)}
         </div>
     }

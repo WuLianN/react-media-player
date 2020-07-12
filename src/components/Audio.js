@@ -10,18 +10,17 @@ function play(id, api, audio) {
     audio.current.play()
 }
 
-export default function Audio(props) {
+export default function Audio() {
     const { id, api } = useSelector(state => state.updateSong.song)
     const { songList } = useSelector(state => state.updateSongList.songList)
-    const { idIndex } = useSelector(state => state.updateIdIndex.idIndex)
+    const idIndex = useSelector(state => state.updateIdIndex.idIndex)
     const { autoIndex } = useSelector(state => state.updateAutoIndex.autoIndex)
-    const { audioStatus } = useSelector(state => state.updateAudioStatus.audioStatus)
+    const audioStatus  = useSelector(state => state.updateAudioStatus.audioStatus)
     const { userControl } = useSelector(state => state.userControlAudio.userControl)
     const dispatch = useDispatch()
     const audio = useRef(null)
-    const volume = props.volume // 音量
-    const loop = props.loop // 单曲循环
-    const mode = props.mode // 播放模式
+    const volume = useSelector(state => state.updateVolume.volume) // 音量
+    const mode = useSelector(state => state.updateMode.mode) // 播放模式
 
     useEffect(() => {
         if (id) {
@@ -90,10 +89,10 @@ export default function Audio(props) {
 
     // 单曲循环 footer -> audio
     useEffect(() => {
-        if (audio) {
-            audio.current.loop = loop
+        if (audio && mode === 'singlecycle') {
+            audio.current.loop = 'loop'
         }
-    }, [loop])
+    }, [mode])
 
     // 手势控制 播放/暂停
     useEffect(() => {
@@ -105,7 +104,7 @@ export default function Audio(props) {
             dispatch(userControlAudio({ userControl: false }))
         }
     }, [audioStatus])
-    
+
     // 获取下一首 + 播放模式（列表循环、随机播放）
     function getNextSong(autoIndex, songList, mode) {
         if (songList && autoIndex && mode) {
@@ -139,12 +138,12 @@ export default function Audio(props) {
 }
 
 /**
- *  audio 的逻辑 
- * 
+ *  audio 的逻辑
+ *
  *  初始 -> 数据流向（数据皆存储于 redux）
  *    1、{ id, api } 的更新 -> 播放音乐
  *    2、idIndex 的更新 -> 分发更新 autoIndex -> 更新 audio 事件函数
- *  
+ *
  *  例子
  *    点击歌单中的歌曲，播放音乐 -> 更新 { id, api } 、idIndex
  *    播放模式(列表、单曲、随机)、自动播放下一曲 -> idIndex -> autoIndex -> audio 事件函数

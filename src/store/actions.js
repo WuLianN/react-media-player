@@ -2,6 +2,7 @@
  * action types
  */
 
+// 音频
 export const UPDATE_SONG = 'UPDATE_SONG' // 更新歌曲
 export const UPDATE_SONGLIST = 'UPDATE_SONGLIST' // 更新歌单
 export const UPDATE_ID_INDEX = 'UPDATE_ID_INDEX' // 更新 id 在歌单中的索引
@@ -16,8 +17,12 @@ export const USER_CONTROL_AUDIO = { // 手动控制 音乐播放器状态 （播
 }
 
 export const UPDATE_CURRENT_TIME = 'UPDATE_CURRENT_TIME' // 更新歌曲当前进度
-
-
+export const UPDATE_VOLUME = 'UPDATE_VOLUME'// 更新音量
+export const UPDATE_MODE = { // 更新模式
+    SONGLIST_LOOP: 'songListLoop',
+    SINGLE_CYCLE: 'singlecycle',
+    RANDOM: 'random'
+}
 
 /*
  * action creators   
@@ -48,13 +53,30 @@ export function updateAudioStatus(playload) {
 }
 
 export function userControlAudio(playload) {
-    if(playload.userControlAudio){
-       return {type: USER_CONTROL_AUDIO.USER, playload}
-    }else{
-       return {type: USER_CONTROL_AUDIO.DEFAULT, playload }
+    if (playload.userControlAudio) {
+        return { type: USER_CONTROL_AUDIO.USER, playload }
+    } else {
+        return { type: USER_CONTROL_AUDIO.DEFAULT, playload }
     }
 }
 
-export function updateCurrentTime(playload){
-    return { type: UPDATE_CURRENT_TIME, playload}
+export function updateCurrentTime(playload) {
+    return { type: UPDATE_CURRENT_TIME, playload }
 }
+
+export function updateVolume(playload) {
+    return { type: UPDATE_VOLUME, playload }
+}
+
+export function updateMode(playload) {
+    if (playload.mode === 'songListLoop') {
+        return { type: UPDATE_MODE.SONGLIST_LOOP, playload }
+    } else if (playload.mode === 'singlecycle') {
+        return { type: UPDATE_MODE.SINGLE_CYCLE, playload }
+    } else if (playload.mode === 'random') {
+        return { type: UPDATE_MODE.RANDOM, playload }
+    }
+}
+
+// 基本
+
