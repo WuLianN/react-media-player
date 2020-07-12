@@ -31,7 +31,7 @@ export default function SiderBar() {
 }
 
 function Player() {
-    const { id, picUrl, artist, songName } = useSelector(state => state.updateSong.song)
+    const { picUrl, artist, songName } = useSelector(state => state.updateSong.song)
     const markImg = require('../../assets/player/enlarge.png')
     const [isShowImg, setIsShowImg] = useState(false)
     const [isShowSongDetail, setIsShowSongDetail] = useState(false)
@@ -49,8 +49,9 @@ function Player() {
             <img className="player-img" src={picUrl} alt={songName}
                 onMouseEnter={() => showMask(true)}
                 onMouseLeave={() => showMask(false)}
+                onClick={() => showSongDetail(true)}
             />
-            <div className="player-mark" onClick={() => showSongDetail(true)} style={isShowImg ? { display: 'block' } : { display: 'none' }}>
+            <div className="player-mark"  style={isShowImg ? { display: 'block' } : { display: 'none' }}>
                 <img src={markImg} className="player-mark-img" /></div>
             <div className="player-detail">
                 <div className="player-detail-name" onClick={() => showSongDetail(true)}>{songName}</div>

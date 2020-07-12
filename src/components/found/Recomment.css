@@ -23,3 +23,15 @@
     font-size: 12px;
     cursor: pointer;
 }
+
+.banner{
+    width: 820px;
+    height: 400px;
+    /* display: flex;
+    flex-flow: row wrap; */
+}
+
+.banner-img{
+    width: 500px;
+    height: 250px;
+}

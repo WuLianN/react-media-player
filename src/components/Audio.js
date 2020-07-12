@@ -90,7 +90,9 @@ export default function Audio() {
     // 单曲循环 footer -> audio
     useEffect(() => {
         if (audio && mode === 'singlecycle') {
-            audio.current.loop = 'loop'
+            audio.current.loop = true
+        }else if(audio && mode === 'random'){
+            audio.current.loop = false
         }
     }, [mode])
 

@@ -1,25 +1,14 @@
 import React, { useEffect, useState, useContext } from "react"
-import api from '../../api/index'
 import { SnippetRecommentList, SnippetNewSong, SnippetRadio, SnippetRecommentMv, SnippetExclusive } from './index'
 import './Recomment.css'
 import { createFromIconfontCN } from '@ant-design/icons';
 import { iconFontUrl } from '../../utils/config'
-
+import Banner from './Banner'
 import { ActiveKeyContext, listData } from '../../views/Found'
 
 const IconFont = createFromIconfontCN({
    scriptUrl: iconFontUrl, // 在 iconfont.cn 上生成
 });
-
-function getBanner() {
-   return api.getBanner(0)
-}
-
-function Banner() {
-   return (
-      <div className="banner"></div>
-   )
-}
 
 function switchList(name) {
    if (name === 'RecommentList') {
@@ -58,35 +47,11 @@ function List() {
 }
 
 export function Recomment() {
-   const [banner, setBanner] = useState(null)
 
-   useEffect(() => {
-      // 广告
-      getBanner().then(res => {
-         const data = res.data.banners
-         let packData = []
-         data.forEach(item => {
-            const { imageUrl, targetId, targetType, url, titleColor, typeTitle } = item
-            const pack = {
-               api: "WY",
-               picUrl: imageUrl,
-               targetId,
-               targetType,
-               url,
-               titleColor,
-               typeTitle
-            }
-
-            packData.push(pack)
-         })
-
-         setBanner(packData)
-      })
-   }, [])
 
    return (
       <div>
-         <Banner banner={banner} />
+         <Banner />
 
          <div>
             <List />

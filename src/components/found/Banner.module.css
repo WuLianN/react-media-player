@@ -1,0 +1,54 @@
+.root {
+    position: relative;
+    margin: 15px auto;
+    width: 820px;
+    height: 250px;
+}
+
+.banners {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.middle {
+    transform: translate(-50%, 0) scale(1);
+    z-index: 2;
+}
+
+.left {
+    transform: translate(-85%, 0) scale(0.8);
+}
+
+.right {
+    transform: translate(-15%, 0) scale(0.8);
+}
+
+.hidden {
+    transform: translate(-50%, 0) scale(1);
+    visibility: hidden;
+}
+
+.enabled {
+    cursor: pointer;
+}
+
+.dots {
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: gray; 
+}
+.active {
+    background-color: red;
+}
