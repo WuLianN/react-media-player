@@ -3,10 +3,12 @@
  */
 
 import { combineReducers } from 'redux'
-import audioReducer from './audioReducer'
+import audioReducers from './audioReducers'
+import otherReducers from './otherReduces'
 
 const reducers = combineReducers({
-    ...audioReducer
+    ...audioReducers,
+    ...otherReducers
 })
 
 export default reducers

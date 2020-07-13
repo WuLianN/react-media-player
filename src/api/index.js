@@ -34,7 +34,9 @@ import {
   topSong,
   topList,
   snippetExclusiveVideo,
-  exclusiveVideo
+  exclusiveVideo,
+  cellPhoneLogin,
+  loginStatus
 } from './source'
 
 export default {
@@ -427,6 +429,25 @@ export default {
 
   getSnippetExclusiveVideo() {
     return axios.get(snippetExclusiveVideo)
+  },
+
+  /**
+  * @description: 手机号登录
+  * @params phone 手机号
+  * @params password 密码
+  * @return:
+  */
+  cellPhoneLogin(data) {
+    const timestamp = + new Date()
+    return axios.post(cellPhoneLogin + '?timestamp=' + timestamp, {
+      phone: data.phone,
+      password: data.password
+
+    })
+  },
+
+  getLoginStatus(){
+    return axios.get(loginStatus)
   }
 }
 

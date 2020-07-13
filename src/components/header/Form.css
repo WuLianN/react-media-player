@@ -1,0 +1,23 @@
+ .login-form {
+     width: 320px;
+     height: 220px;
+     display: flex;
+     flex-flow: column nowrap;
+     align-items: center;
+ }
+
+ .login-form-checkbox{
+     width: 250px;
+     height: 45px;
+     display: block;
+     margin-bottom: 20px;
+     font-size: 12px;
+ }
+
+ .login-form-button {
+     width: 250px;
+ }
+
+ .login-form-input {
+     width: 250px;
+ }

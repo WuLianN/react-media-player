@@ -63,8 +63,6 @@ const Banner = () => {
             })
 
             setBanners(packData)
-
-            console.log(packData)
         })
     }, [])
 
@@ -107,6 +105,7 @@ const Banner = () => {
 
                     return (
                         <BannerItem
+                            key={index}
                             bannerIndex={index}
                             typeTitle={typeTitle}
                             imageUrl={picUrl}
@@ -117,10 +116,10 @@ const Banner = () => {
                 })}
             </div>
             <div className={styles.dots}>
-                {banners.map(({ imageUrl }, index) => {
+                {banners.map((item, index) => {
                     return (
                         <div
-                            key={imageUrl}
+                            key={index}
                             className={cn(styles.dot, index === currentMid ? styles.active : '')}
                             onMouseOver={() => handleMidChange(index)}
                         />

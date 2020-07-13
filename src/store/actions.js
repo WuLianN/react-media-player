@@ -79,4 +79,8 @@ export function updateMode(playload) {
 }
 
 // 基本
+export const UPDATE_LOGIN_STATUS = 'UPDATE_LOGIN_STATUS'
 
+export function updateLoginStatus(playload) {
+    return { type: UPDATE_LOGIN_STATUS, playload }
+}

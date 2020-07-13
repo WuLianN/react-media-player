@@ -36,8 +36,9 @@ const api = {
   topSong: `${proxyUrl}/top/song`, // 新歌速递
   topList: `${proxyUrl}/toplist`, // 所有榜单
   snippetExclusiveVideo: `${proxyUrl}/personalized/privatecontent`, // 独家放送(入口列表)
-  exclusiveVideo: `${proxyUrl}/personalized/privatecontent/list` // 独家放送列表
-
+  exclusiveVideo: `${proxyUrl}/personalized/privatecontent/list`, // 独家放送列表
+  cellPhoneLogin: `${proxyUrl}/login/cellphone`, // 手机登录
+  loginStatus: `${proxyUrl}/login/status` // 登录状态
 }
 
 export const search = api.search
@@ -68,3 +69,5 @@ export const topSong = api.topSong
 export const topList = api.topList
 export const snippetExclusiveVideo = api.snippetExclusiveVideo
 export const exclusiveVideo = api.exclusiveVideo
+export const cellPhoneLogin = api.cellPhoneLogin
+export const loginStatus = api.loginStatus

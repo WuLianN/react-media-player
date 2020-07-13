@@ -1,12 +1,13 @@
 .root {
     position: relative;
     margin: 15px auto;
-    width: 820px;
+    width: 750px;
     height: 250px;
 }
 
 .banners {
     width: 100%;
+    height: 200px;
     position: absolute;
     top: 0;
     left: 0;
@@ -18,11 +19,11 @@
 }
 
 .left {
-    transform: translate(-85%, 0) scale(0.8);
+    transform: translate(-82%, 0) scale(0.8);
 }
 
 .right {
-    transform: translate(-15%, 0) scale(0.8);
+    transform: translate(-18%, 0) scale(0.8);
 }
 
 .hidden {
@@ -47,8 +48,9 @@
     height: 7px;
     margin-right: 10px;
     border-radius: 50%;
-    background-color: gray; 
+    background-color: gray;
 }
+
 .active {
     background-color: red;
 }
