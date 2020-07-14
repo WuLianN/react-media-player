@@ -60,8 +60,8 @@ const audioReducer = {
         switch (action.type) {
             case UPDATE_AUTO_INDEX:
                 return {
-                    ...state,
-                    autoIndex: action.playload
+                    state,
+                    autoIndex: action.playload.autoIndex
                 }
             default:
                 return state

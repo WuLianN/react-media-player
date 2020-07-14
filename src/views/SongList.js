@@ -16,7 +16,7 @@ export default function SongList() {
 
     function Songs() {
         const [songs, setSongs] = useState(null)
-        const { autoIndex } = useSelector(state => state.updateAutoIndex.autoIndex)
+        const autoIndex = useSelector(state => state.updateAutoIndex.autoIndex)
         const { id: songId } = useSelector(state => state.updateSong.song)
 
         useEffect(() => {

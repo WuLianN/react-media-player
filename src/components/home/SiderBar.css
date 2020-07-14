@@ -15,9 +15,8 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     border-top: 1px solid rgb(225, 225, 256);
-    padding: 0 0 0 8px;
     cursor: pointer;
 }
 
@@ -43,7 +42,7 @@
 }
 
 .player-detail {
-    width: 140px;
+    width: 130px;
     height: 40px;
 }
 

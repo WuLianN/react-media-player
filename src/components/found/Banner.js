@@ -2,8 +2,9 @@ import React, { useEffect, useState, useMemo, useRef } from 'react'
 import cn from 'classnames'
 import api from '../../api/index'
 import BannerItem from './BannerItem'
-
+import { updateSong } from '../../store/actions'
 import styles from './Banner.module.css'
+import { useDispatch } from 'react-redux'
 
 const useInterval = (callback, delay) => {
     const savedCallback = useRef(() => { })
@@ -40,7 +41,7 @@ const getBanner = () => {
 
 const Banner = () => {
     const [currentMid, setCurrentMid] = useState(0)
-
+    const dispatch = useDispatch()
     const [banners, setBanners] = useState(null)
 
     useEffect(() => {
@@ -61,7 +62,6 @@ const Banner = () => {
 
                 packData.push(pack)
             })
-
             setBanners(packData)
         })
     }, [])
@@ -91,8 +91,31 @@ const Banner = () => {
         setCurrentMid(index)
     }
 
-    const handleItemClick = (musicId) => {
+    const handleItemClick = (targetType, targetId, e) => {
+        e.preventDefault();
 
+        if (targetType === TARGET_TYPE.MUSIC) {
+            // 获取歌曲详情
+            api.getSongDetail(targetId).then(res => {
+                const purifyRes = []
+                const result = res.data.songs
+                result.forEach(item => {
+                    purifyRes.push({
+                        id: item.id,
+                        songName: item.name,
+                        artist: item.ar,
+                        album: item.al,
+                        api: 'WY',
+                        duration: item.dt,
+                        picUrl: item.al.picUrl
+                    })
+                })
+                // 更新音乐
+                dispatch(updateSong(purifyRes[0]))
+            })
+
+        } else if (targetType === TARGET_TYPE.ALBUM) {
+        }
     }
 
     if (banners) {
@@ -101,7 +124,7 @@ const Banner = () => {
                 {banners.map((item, index) => {
                     const { picUrl, typeTitle, targetId, targetType } = item
                     const className = bannersClassName[index] || styles.hidden
-                    const isMusicType = targetType === TARGET_TYPE.MUSIC
+                    // const isMusicType = targetType === TARGET_TYPE.MUSIC
 
                     return (
                         <BannerItem
@@ -109,8 +132,8 @@ const Banner = () => {
                             bannerIndex={index}
                             typeTitle={typeTitle}
                             imageUrl={picUrl}
-                            className={cn(className, isMusicType && styles.enabled)}
-                            onClick={isMusicType ? () => handleItemClick(targetId) : undefined}
+                            className={cn(className, styles.enabled)}
+                            onClick={(e) => handleItemClick(targetType, targetId, e)}
                         />
                     )
                 })}

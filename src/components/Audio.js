@@ -14,8 +14,8 @@ export default function Audio() {
     const { id, api } = useSelector(state => state.updateSong.song)
     const { songList } = useSelector(state => state.updateSongList.songList)
     const idIndex = useSelector(state => state.updateIdIndex.idIndex)
-    const { autoIndex } = useSelector(state => state.updateAutoIndex.autoIndex)
-    const audioStatus  = useSelector(state => state.updateAudioStatus.audioStatus)
+    const autoIndex = useSelector(state => state.updateAutoIndex.autoIndex)
+    const audioStatus = useSelector(state => state.updateAudioStatus.audioStatus)
     const { userControl } = useSelector(state => state.userControlAudio.userControl)
     const dispatch = useDispatch()
     const audio = useRef(null)
@@ -91,7 +91,7 @@ export default function Audio() {
     useEffect(() => {
         if (audio && mode === 'singlecycle') {
             audio.current.loop = true
-        }else if(audio && mode === 'random'){
+        } else if (audio && mode === 'random') {
             audio.current.loop = false
         }
     }, [mode])

@@ -22,7 +22,7 @@ export default function Footer() {
         const pause = require('../../assets/player/pause.png')
         const play = require('../../assets/player/play.png')
         const audioStatus = useSelector(state => state.updateAudioStatus.audioStatus)
-        const { autoIndex } = useSelector(state => state.updateAutoIndex.autoIndex)
+        const autoIndex = useSelector(state => state.updateAutoIndex.autoIndex)
         const { songList } = useSelector(state => state.updateSongList.songList)
         const imgStatus = useRef(null)
 
@@ -60,7 +60,7 @@ export default function Footer() {
         }
 
         // 下一首
-        function nextSong() {   
+        function nextSong() {
             const nextIndex = autoIndex + 1
             if (nextIndex !== songList.length) {
                 const data = songList[nextIndex]
@@ -201,7 +201,7 @@ export default function Footer() {
         }
 
         function SongList() {
-            const { autoIndex } = useSelector(state => state.updateAutoIndex.autoIndex)
+            const autoIndex = useSelector(state => state.updateAutoIndex.autoIndex)
 
             if (songList) {
                 return (<div className="footer-songList" style={showSongList ? { display: 'block' } : { display: 'none' }}>

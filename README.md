@@ -1,3 +1,10 @@
+
+### 功能
+- [x] 登录
+
+
+<br>
+
 下载 / 运行 NeteaseCloudMusicApi
 
 ``` 
@@ -21,7 +28,7 @@ npm run start / yarn start
 **更新歌曲**
 
 1.  updateSong(data) // 更新歌曲信息 -> 获取 id、api 
-2.  updateIdIndex(idIndexData) // 更新当前歌曲索引
+2.  updateIdIndex(idIndexData) // 更新当前歌曲索引 (有歌单)
 
 如下，控件播放下一首歌
 
