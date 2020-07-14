@@ -36,7 +36,8 @@ import {
   snippetExclusiveVideo,
   exclusiveVideo,
   cellPhoneLogin,
-  loginStatus
+  loginStatus,
+  userDetail
 } from './source'
 
 export default {
@@ -442,12 +443,26 @@ export default {
     return axios.post(cellPhoneLogin + '?timestamp=' + timestamp, {
       phone: data.phone,
       password: data.password
-
     })
   },
 
-  getLoginStatus(){
+  /**
+  * @description: 用户登录状态
+  * @return:
+  */
+  getLoginStatus() {
     return axios.get(loginStatus)
+  },
+
+  /**
+   * @description: 用户详情
+   * @params uid 用户id
+   * @return:
+   */
+  getUserDetail(uid) {
+    return axios.get(userDetail, {
+      params: { uid }
+    })
   }
 }
 

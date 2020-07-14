@@ -1,0 +1,166 @@
+.popover {
+    width: 300px;
+    height: 360px;
+    position: absolute;
+    top: 50px;
+    left: -90px;
+    z-index: 200;
+    background: white;
+    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 1%;
+    background: rgb(250, 250, 250);
+}
+
+/* .popover-triangle-wrap{
+    width: 100%;
+    height: 20px;
+    margin: 0 auto;
+    background: rgba(198, 47, 47, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+.popover-triangle{
+   width: 0;
+   height: 0;
+   border: 10px solid;
+   border-color: transparent transparent white;
+   position: absolute;
+   top: -20px;
+   left: 140px;
+}
+
+.popover-header {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popover-header-user{
+    width: 200px;
+    height: 50px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.popover-header-user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 10px 0 25px;
+}
+
+.popover-header-clock{
+    width: 60px;
+    height: 25px;
+    margin-right: 20px;
+    background: white;
+    border: 1px solid rgb(236, 237, 238);
+    border-radius: 1%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.popover-header-clock:hover{
+    background: rgb(236, 237, 238);
+}
+
+.popover-middle {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid rgb(236, 237, 238);
+}
+
+.popover-middle-box {
+    width: 100px;
+    height: 40px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.border-right {
+    border-right: 1px solid rgb(236, 237, 238);
+}
+
+.border-bottom {
+    border-bottom: 1px solid rgb(236, 237, 238);
+}
+
+.popover-main-box {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popover-main-box:hover {
+    background-color: rgb(236, 237, 238);
+}
+
+.popover-main-box-left {
+    width: 150px;
+    height: 40px;
+    margin-left: 20px;
+    line-height: 40px;
+}
+
+.popover-main-box-left-text {
+    margin-left: 15px;
+}
+
+.popover-main-box-right{
+    width: 50px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.popover-footer-box {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popover-footer-box:hover {
+    background-color: rgb(236, 237, 238);
+}
+
+.popover-footer-box-left {
+    width: 150px;
+    height: 50px;
+    margin-left: 20px;
+    line-height: 50px;
+}
+
+.popover-footer-box-left-text {
+    margin-left: 15px;
+}
+
+.fontWeight{
+    font-weight: bold
+}
+
+.fontSize{
+    font-size: 12px;
+}

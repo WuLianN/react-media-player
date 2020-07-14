@@ -1,0 +1,47 @@
+.header-login{
+    position: relative;
+}
+
+.header-loginStatus {
+    width: 120px;
+    height: 50px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-around;
+    color: rgb(238, 193, 193);
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.header-loginStatus:hover{
+    color: white;
+}
+
+.header-loginStatus-img-wrap {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 50%;  
+}
+
+.header-loginStatus-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;  
+}
+
+.header-loginStatus-user-wrap{
+    width: 75px;
+}
+
+.header-loginStatus-nickname{
+    margin-right: 4px;
+}
+
+.header-logo-img {
+    width: 35px;
+    height: 35px;
+    margin-left: 10px;
+}
+

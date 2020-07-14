@@ -73,3 +73,12 @@ export function addZero(index) {
     return index
   }
 }
+
+// 判断对象是否不为 {}
+export function hasProperty(obj) {
+  const isObj = Object.prototype.toString.call(obj) === '[object Object]'
+  if (isObj) { 
+      const result = JSON.stringify(obj) === '{}'
+      return !result
+  }
+}
