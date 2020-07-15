@@ -79,8 +79,15 @@ export function updateMode(playload) {
 }
 
 // 基本
-export const UPDATE_LOGIN_STATUS = 'UPDATE_LOGIN_STATUS'
+export const UPDATE_LOGIN_STATUS = {
+    WY: 'UPDATE_LOGIN_STATUS_WY',
+    QQ: 'UPDATE_LOGIN_STATUS_QQ'
+}
 
 export function updateLoginStatus(playload) {
-    return { type: UPDATE_LOGIN_STATUS, playload }
+    if (playload.platform === 'WY') {
+        return { type: UPDATE_LOGIN_STATUS.WY, playload }
+    } else if (playload.platform === 'QQ') {
+        return { type: UPDATE_LOGIN_STATUS.QQ, playload }
+    }
 }

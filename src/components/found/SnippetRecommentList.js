@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import api from '../../api/index'
+import api from '../../api/wy/index'
 import './Snippet.css'
 import { useHistory } from "react-router-dom";
 

@@ -1,6 +1,6 @@
 /*
- * @Description: In User Settings Edit
- * @Author: your name
+ * @Description: QQ音乐 api 鼻子亲了脸
+ * @Author: WuLianN
  * @Date: 2019-08-13 10:54:21
  * @LastEditTime: 2019-08-22 18:52:14
  * @LastEditors: Please set LastEditors
@@ -12,7 +12,7 @@ import {
   songList,
   lrc,
   url
-} from './qqSource'
+} from './source'
 
 export default {
   /**

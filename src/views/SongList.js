@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import api from '../api/index'
+import api from '../api/wy/index'
 import './SongList.css'
 import { updateSong, updateSongList, updateIdIndex } from "../store/actions"
 import { useDispatch, useSelector } from "react-redux"

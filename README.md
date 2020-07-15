@@ -25,6 +25,14 @@ npm install / yarn install
 npm run start / yarn start
 ```
 
+<br>
+
+### 核心技术
+
+![](https://github.com/WuLianN/react-media-player/blob/master/src/assets/display/tech-1.png)
+
+<br>
+
 **更新歌曲**
 
 1.  updateSong(data) // 更新歌曲信息 -> 获取 id、api 

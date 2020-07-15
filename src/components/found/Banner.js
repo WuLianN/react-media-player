@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react'
 import cn from 'classnames'
-import api from '../../api/index'
+import api from '../../api/wy/index'
 import BannerItem from './BannerItem'
 import { updateSong } from '../../store/actions'
 import styles from './Banner.module.css'

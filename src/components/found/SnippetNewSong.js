@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import api from '../../api/index'
+import api from '../../api/wy/index'
 import { mapArtist, addZero } from '../../utils/transform'
 import { useDispatch } from "react-redux"
 import { updateSong, updateIdIndex, updateSongList } from '../../store/actions'

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import api from '../../api/index'
+import api from '../../api/wy/index'
 import { hasProperty } from '../../utils/transform'
 import './Profile.css'
 import {

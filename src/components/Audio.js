@@ -30,7 +30,7 @@ export default function Audio() {
 
     useEffect(() => {
         // 获得当前歌曲的索引 -> 更新autoIndex
-        if (idIndex) {
+        if (idIndex >= 0) {
             dispatch(updateAutoIndex({ autoIndex: idIndex }))
         }
     }, [idIndex])
@@ -109,14 +109,13 @@ export default function Audio() {
 
     // 获取下一首 + 播放模式（列表循环、随机播放）
     function getNextSong(autoIndex, songList, mode) {
-        if (songList && autoIndex && mode) {
+        if (songList && autoIndex >= 0 && mode) {
             let nextIndex
             if (mode === 'songListLoop') {
                 // 列表循环
                 nextIndex = autoIndex + 1
                 // 重新播放
                 if (nextIndex === songList.length) {
-                    // autoIndex = -1
                     nextIndex = 0
                 }
             } else if (mode === 'random') {

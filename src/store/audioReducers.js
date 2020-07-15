@@ -43,7 +43,7 @@ const audioReducer = {
     },
 
     // 更新id在歌单中的索引
-    updateIdIndex(state = { idIndex: 0 }, action) {
+    updateIdIndex(state = { idIndex: '' }, action) {
         switch (action.type) {
             case UPDATE_ID_INDEX:
                 return {
@@ -56,7 +56,7 @@ const audioReducer = {
     },
 
     // 更新自动递增的索引
-    updateAutoIndex(state = { autoIndex: {} }, action) {
+    updateAutoIndex(state = { autoIndex: '' }, action) {
         switch (action.type) {
             case UPDATE_AUTO_INDEX:
                 return {

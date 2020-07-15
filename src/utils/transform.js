@@ -82,3 +82,7 @@ export function hasProperty(obj) {
       return !result
   }
 }
+
+export function getLocalStorageValue(key) {
+  return localStorage.getItem(key)
+}

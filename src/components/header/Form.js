@@ -2,7 +2,7 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './Form.css'
 import React from 'react'
-import api from '../../api/index'
+import api from '../../api/wy/index'
 
 const NormalLoginForm = () => {
     const onFinish = values => {
