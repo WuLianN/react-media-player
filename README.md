@@ -1,9 +1,24 @@
 
 ### 功能
 - [x] 登录
+- [x] 个性推荐
+- [] 歌单
+- [] 排行榜
+- [] 歌手
 
 
 <br>
+
+### 技术栈
+
+* react
+* redux
+* react-router
+* antd
+
+<br>
+
+### 本地玩转
 
 下载 / 运行 NeteaseCloudMusicApi
 
@@ -28,6 +43,8 @@ npm run start / yarn start
 <br>
 
 ### 核心技术
+
+<br>
 
 ![](https://github.com/WuLianN/react-media-player/blob/master/src/assets/display/tech-1.png)
 

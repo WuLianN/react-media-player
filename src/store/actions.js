@@ -84,10 +84,16 @@ export const UPDATE_LOGIN_STATUS = {
     QQ: 'UPDATE_LOGIN_STATUS_QQ'
 }
 
+export const UPDATE_SIDERBAR = 'UPDATE_SIDERBAR' // 获取 '全部' 用户歌单后 -> 更新SiderBar
+
 export function updateLoginStatus(playload) {
     if (playload.platform === 'WY') {
         return { type: UPDATE_LOGIN_STATUS.WY, playload }
     } else if (playload.platform === 'QQ') {
         return { type: UPDATE_LOGIN_STATUS.QQ, playload }
     }
+}
+
+export function updateSiderBar(playload) {
+    return { type: UPDATE_SIDERBAR, playload }
 }

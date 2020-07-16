@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import api from '../api/wy/index'
+import qqApi from '../api/qq/index'
 import './SongList.css'
 import { updateSong, updateSongList, updateIdIndex } from "../store/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { formatSec, mapArtist, addZero } from '../utils/transform'
 
-function getSongList(id) {
+function getSongList_WY(id) {
     return api.getSongList(id)
 }
 
+function getSongList_QQ(id) {
+    return qqApi.getSongList(id, 1)
+}
+
 export default function SongList() {
-    const { id } = useParams()
+    const { api: API, id } = useParams()
+
     const dispatch = useDispatch()
 
     function Songs() {
@@ -20,35 +26,56 @@ export default function SongList() {
         const { id: songId } = useSelector(state => state.updateSong.song)
 
         useEffect(() => {
-            getSongList(id).then(res => {
-                const songList = res.data.playlist
-                const { trackIds } = songList
+            if (API === 'WY') {
+                getSongList_WY(id).then(res => {
+                    const songList = res.data.playlist
+                    const { trackIds } = songList
 
-                // 登录后能获取全部歌曲，否则用trackIds中的所有id去调用url的接口
-                const ids = trackIds.map(item => {
-                    return item.id
+                    // 登录后能获取全部歌曲，否则用trackIds中的所有id去调用url的接口
+                    const ids = trackIds.map(item => {
+                        return item.id
+                    })
+
+                    const standardIds = ids.toString()
+
+                    api.getSongDetail(standardIds).then(res => {
+                        const purifyRes = []
+                        const result = res.data.songs
+                        result.forEach(item => {
+                            purifyRes.push({
+                                id: item.id,
+                                songName: item.name,
+                                artist: item.ar,
+                                album: item.al,
+                                api: 'WY',
+                                duration: item.dt,
+                                picUrl: item.al.picUrl
+                            })
+                        })
+                        setSongs(purifyRes)
+                    })
                 })
 
-                const standardIds = ids.toString()
-
-                api.getSongDetail(standardIds).then(res => {
+            } else if (API === 'QQ') {
+                getSongList_QQ(id).then(res => {
+                    // console.log(res.data)
                     const purifyRes = []
-                    const result = res.data.songs
+                    const result = res.data.data
                     result.forEach(item => {
                         purifyRes.push({
                             id: item.id,
                             songName: item.name,
-                            artist: item.ar,
-                            album: item.al,
-                            api: 'WY',
-                            duration: item.dt,
-                            picUrl: item.al.picUrl
+                            artist: item.singer,
+                            album: '',
+                            api: 'QQ',
+                            duration: item.time * 1000,
+                            picUrl: item.pic
                         })
                     })
                     setSongs(purifyRes)
                 })
-            })
-        }, [id])
+            }
+        }, [id, API])
 
         function update(item, index, e) {
             e.preventDefault();
@@ -64,7 +91,7 @@ export default function SongList() {
                 <div className="songs-75">{addZero(index + 1)}</div>
                 <div className="songs-75"></div>
                 <div className="songs-300">{item.songName}</div>
-                <div className="songs-200">{mapArtist(item.artist)}</div>
+                <div className="songs-200">{item.api === 'WY' ? mapArtist(item.artist): item.artist}</div>
                 <div className="songs-200">{item.album.name}</div>
                 <div className="songs-100">{formatSec(item.duration / 1000)}</div>
             </div >)

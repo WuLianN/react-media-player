@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import "./LoginStatus.css"
 import Login from './Login'
 import Profile from './Profile'
 import api from '../../api/wy/index'
 import { CaretDownOutlined } from '@ant-design/icons';
 import { hasProperty, getLocalStorageValue } from '../../utils/transform'
+import { updateSiderBar } from '../../store/actions'
 
 export default function LoginStatus() {
     const user = require('../../assets/logo/user.png')
     const hasLogin_WY = useSelector(state => state.updateLoginStatus.hasLogin_WY)
     const [showLogin, setShowLogin] = useState(false)
     const [profile, setProfile] = useState(null)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         // 获取登录状态 -> 用户信息
@@ -25,6 +27,9 @@ export default function LoginStatus() {
                 const hasUserId = getLocalStorageValue(userId.toString())
                 if (!hasUserId) {
                     localStorage.setItem('wy_uid', userId)
+                    // 刷新siderbar
+                    const random = Math.random() * 100
+                    dispatch(updateSiderBar({ update: random }))
                 }
             })
         }

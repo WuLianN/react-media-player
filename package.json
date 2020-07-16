@@ -1,7 +1,8 @@
 {
-  "name": "demo",
+  "name": "media-player",
   "version": "0.1.0",
   "private": true,
+  "author": "WuLianN",
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "@testing-library/jest-dom": "^4.2.4",

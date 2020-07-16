@@ -313,7 +313,7 @@ export default {
    * @return:
    */
 
-  getUsetSongList(uid) {
+  getUserSongList(uid) {
     return axios.get(userSongList, {
       params: {
         uid

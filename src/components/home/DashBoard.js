@@ -3,7 +3,8 @@ import SiderBar from "./SiderBar"
 import "./DashBoard.css"
 import Found from "../../views/Found"
 import SongList from '../../views/SongList'
-
+import MoreUserSongList from "../siderbar/MoreUserSongList"
+import NoMatch from '../other/NoMatch'
 import {
     BrowserRouter as Router,
     Switch,
@@ -35,8 +36,17 @@ export default function DashBoard() {
                         </Route>
 
                         {/* 歌单 */}
-                        <Route path={"/songList/:id"}>
+                        <Route path={"/songList/:api/:id"}>
                             <SongList />
+                        </Route>
+                        
+                        {/* 获取更多歌单 */}
+                        <Route path={"/moreUserSongList"}>
+                            <MoreUserSongList />
+                        </Route>
+
+                        <Route>
+                            <NoMatch />
                         </Route>
                     </Switch>
                 </div>

@@ -22,7 +22,7 @@ function App() {
     const value = cookie.getCookie(name)
     // cookie 状态 
     const bool = Boolean(value)
-  
+
     // 存储 cookie 状态 -> redux
     dispatch(updateLoginStatus({ hasLogin_WY: bool, platform: 'WY' }))
   }

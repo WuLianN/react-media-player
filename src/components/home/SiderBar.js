@@ -10,6 +10,7 @@ import { mapArtist, getLocalStorageValue } from '../../utils/transform'
 import SongDetail from '../../views/SongDetail'
 import api from "../../api/wy/index";
 import qqApi from '../../api/qq/index'
+import axios from "axios";
 
 const IconFont = createFromIconfontCN({
     scriptUrl: iconFontUrl, // 在 iconfont.cn 上生成
@@ -19,9 +20,9 @@ const { SubMenu } = Menu;
 
 export default function SiderBar() {
     const history = useHistory()
-
     const qq_uid = getLocalStorageValue('qq_uid')
     const wy_uid = getLocalStorageValue('wy_uid')
+    const update = useSelector(state => state.updateSiderBar.update) // 重新render作用 <- 获取了全部的uid
 
     const [allUserSongList, setAllUserSongList] = useState(null)
 
@@ -29,13 +30,47 @@ export default function SiderBar() {
         history.push('/found')
     }, [])
 
+    function wySongList(uid) {
+        return api.getUserSongList(uid)
+    }
+
+    function qqSongList(uid) {
+        return qqApi.getUserSongList(uid)
+    }
+
     useEffect(() => {
         async function getUserSongList(uid) {
             const { qq_uid, wy_uid } = uid
             if (qq_uid && wy_uid) {
+                axios.all([wySongList(wy_uid), qqSongList(qq_uid)]).then(res => {
+                    const WY = res[0].data.playlist
+                    const QQ = res[1].data.data
+                    let packData = []
 
+                    WY.forEach(item => {
+                        packData.push({
+                            api: 'WY',
+                            id: item.id,
+                            name: item.name,
+                            picUrl: item.coverImgUrl
+                        })
+                    })
+
+                    QQ.forEach((item, index) => {
+                        if (index >= 1) {
+                            packData.push({
+                                api: 'QQ',
+                                id: item.tid,
+                                name: item.diss_name,
+                                picUrl: item.diss_cover
+                            })
+                        }
+                    })
+
+                    setAllUserSongList(packData)
+                })
             } else if (wy_uid) {
-                const response = await api.getUsetSongList(wy_uid)
+                const response = await wySongList(wy_uid)
                 const result = response.data.playlist
                 let packData = []
                 result.forEach(item => {
@@ -48,7 +83,7 @@ export default function SiderBar() {
                 })
                 setAllUserSongList(packData)
             } else if (qq_uid) {
-                const response = await qqApi.getUsetSongList(qq_uid)
+                const response = await qqSongList(qq_uid)
                 const result = response.data.data
                 let packData = []
                 result.forEach((item, index) => {
@@ -79,7 +114,7 @@ export default function SiderBar() {
 }
 
 function Player() {
-    const { picUrl, artist, songName } = useSelector(state => state.updateSong.song)
+    const { picUrl, artist, songName, api } = useSelector(state => state.updateSong.song)
     const markImg = require('../../assets/player/enlarge.png')
     const [isShowImg, setIsShowImg] = useState(false)
     const [isShowSongDetail, setIsShowSongDetail] = useState(false)
@@ -103,7 +138,7 @@ function Player() {
                 <img src={markImg} className="player-mark-img" /></div>
             <div className="player-detail">
                 <div className="player-detail-name" onClick={() => showSongDetail(true)}>{songName}</div>
-                <div className="player-detail-artist">{mapArtist(artist)}</div>
+                <div className="player-detail-artist">{api === 'WY' ? mapArtist(artist) : artist}</div>
             </div>
 
             <div style={isShowSongDetail ? { display: 'block' } : { display: 'none' }} className="player-songDetail">
@@ -198,14 +233,14 @@ function Sider(props) {
             <SubMenu key="sub3" title="我的歌单" icon={<MenuUnfoldOutlined />}>
                 {allUserSongList && allUserSongList.map((item, index) =>
                     <div key={9 + index}>
-                        <Link className="menu-special-item" to={`/songList/${item.id}`}>
+                        <Link className="menu-special-item" to={`/songList/${item.api}/${item.id}`}>
                             <img className="menu-special-img" src={item.picUrl} alt="歌单" />
                             <span className="menu-special-text">{item.name}</span>
                         </Link>
                     </div>
                 )}
                 < Menu.Item key="100">
-                    <Link to={"/"} >
+                    <Link to={"/moreUserSongList"} >
                         <SmileOutlined />
                         <span>更多获取歌单？</span>
                     </Link>
