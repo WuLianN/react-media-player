@@ -1,0 +1,46 @@
+.history {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.left {
+    width: 25px;
+    height: 50px;
+}
+
+.right {
+    width: 25px;
+    height: 50px;
+}
+
+.icon {
+    width: 25px;
+    height: 20px;
+    display: flex !important;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: rgb(223, 107, 107) !important;
+    cursor: pointer;
+}
+
+.icon1 {
+    border-top: 1px solid rgb(167, 39, 39);
+    border-bottom: 1px solid rgb(167, 39, 39);
+    border-left: 1px solid rgb(167, 39, 39);
+}
+
+.icon2 {
+    border: 1px solid rgb(167, 39, 39);
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

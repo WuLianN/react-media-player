@@ -12,8 +12,8 @@ function List(props) {
 
     function goSongList(item, e) {
         e.preventDefault();
-        const { id } = item
-        history.push(`/songList/${id}`);
+        const { id, api } = item
+        history.push(`/songList/${api}/${id}`);
     }
 
     // console.log(props)

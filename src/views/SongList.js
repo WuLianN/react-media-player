@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import api from '../api/wy/index'
 import qqApi from '../api/qq/index'
-import './SongList.css'
+// import './SongList.css'
 import { updateSong, updateSongList, updateIdIndex } from "../store/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { formatSec, mapArtist, addZero } from '../utils/transform'
+import cn from 'classnames'
+import styles from './SongList.module.css'
 
 function getSongList_WY(id) {
     return api.getSongList(id)
@@ -85,15 +87,17 @@ export default function SongList() {
         }
 
         if (songs) {
-            return songs.map((item, index) => <div className="songs" style={index === autoIndex && songId === item.id ? { color: 'red' } : { color: '' }}
+            return songs.map((item, index) => <div
+                className={cn(index === autoIndex && songId === item.id ? styles.color : '', (index + 1) % 2 === 0 ? styles.bg : '', styles.songs)
+                }
                 key={index} onClick={(e) => update(item, index, e)
                 }>
-                <div className="songs-75">{addZero(index + 1)}</div>
-                <div className="songs-75"></div>
-                <div className="songs-300">{item.songName}</div>
-                <div className="songs-200">{item.api === 'WY' ? mapArtist(item.artist): item.artist}</div>
-                <div className="songs-200">{item.album.name}</div>
-                <div className="songs-100">{formatSec(item.duration / 1000)}</div>
+                <div className={styles.songs75}>{addZero(index + 1)}</div>
+                <div className={styles.songs75}></div>
+                <div className={styles.songs300}>{item.songName}</div>
+                <div className={styles.songs200}>{item.api === 'WY' ? mapArtist(item.artist) : item.artist}</div>
+                <div className={styles.songs200}>{item.album.name}</div>
+                <div className={styles.songs100}>{formatSec(item.duration / 1000)}</div>
             </div >)
         }
         return null

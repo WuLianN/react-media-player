@@ -1,6 +1,7 @@
 import React from "react"
 import "./Header.css"
 import LoginStatus from '../header/LoginStatus'
+import History from '../header/History'
 
 
 export default function Header() {
@@ -14,6 +15,7 @@ export default function Header() {
                 <img className="header-logo-img" src={qqLogo} alt="qq" />
             </div>
 
+            <History />
             <LoginStatus />
         </div>
     )
