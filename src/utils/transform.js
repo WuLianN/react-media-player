@@ -63,12 +63,19 @@ export function snippet17(value) {
 
 // ['刘德华', '张学友'] -> 刘德华 & 张学友
 export function mapArtist(arr) {
-  return arr.map((i, index) => `${i.name}${index === arr.length - 1 ? '' : ' & '}`
-  )
+  return arr.map((i, index) => `${i.name}${index === arr.length - 1 ? '' : ' & '}`)
 }
 
-export function reverseMapArtist(str){
-  return str.split('&')
+export function reverseMapArtist(str) {
+  const result = str.split('/')
+  let artist = []
+  result.forEach(item => {
+    artist.push({
+      name: item
+    })
+  })
+
+  return artist
 }
 
 export function addZero(index) {

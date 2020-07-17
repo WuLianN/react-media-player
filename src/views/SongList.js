@@ -73,7 +73,7 @@ export default function SongList() {
                             picUrl: item.pic
                         })
                     })
-                    setSongs(purifyRes)
+                    setSongs(purifyRes)  
                 })
             }
         }, [id, API])

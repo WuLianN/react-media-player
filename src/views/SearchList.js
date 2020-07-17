@@ -73,8 +73,12 @@ export default function SearchList() {
                     return cur
                 }, [])
 
-                const allSongs = songs.concat(r4) // 偏移量
-                setSongs(allSongs)
+                if (offset !== 0) {
+                    const allSongs = songs.concat(r4) // 偏移量
+                    setSongs(allSongs)
+                } else {
+                    setSongs(r4)
+                }
             })
         )
     }, [word, offset])
