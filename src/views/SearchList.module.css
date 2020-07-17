@@ -1,0 +1,11 @@
+.searchList{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.searchResult{
+    position: relative;
+    width: 100%;
+    height: 100px;
+}

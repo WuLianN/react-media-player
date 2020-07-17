@@ -210,7 +210,7 @@ export default function Footer() {
 
                     {songList.map((item, index) => <div key={index} className="footer-songList-song" style={index === autoIndex && id === item.id ? { color: 'red' } : { color: '' }}>
                         <span className="footer-songList-songName">{item.songName}</span>
-                        <span className="footer-songList-artist">{item.api === 'WY' ? mapArtist(item.artist) : item.artist}</span>
+                        <span className="footer-songList-artist">{mapArtist(item.artist)}</span>
                         <span></span>
                         <span className="footer-songList-duration">{formatSec(item.duration / 1000)}</span>
                     </div>)}

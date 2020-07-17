@@ -12,7 +12,7 @@ import {
   url,
   pic,
   lrc
-} from './kwSource'
+} from './source'
 
 export default {
   /**
@@ -23,7 +23,7 @@ export default {
       * @return:
       */
 
-  getKWsearch (keywords, type, pageSize) {
+  getSearch (keywords, type, pageSize) {
     return axios.get(search, {
       params: {
         keyword: keywords,
@@ -40,7 +40,7 @@ export default {
     * @return:
     */
 
-  getKWurl (id, quality) {
+  geturl (id, quality) {
     return axios.get(url, {
       params: {
         id: id,
@@ -56,7 +56,7 @@ export default {
    * @return:
    */
 
-  getKWpic (id) {
+  getpic (id) {
     return axios.get(pic, {
       params: {
         id: id
@@ -71,7 +71,7 @@ export default {
     * @return:
     */
 
-  getKWlrc (id) {
+  getlrc (id) {
     return axios.get(lrc, {
       params: {
         id: id

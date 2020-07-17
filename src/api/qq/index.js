@@ -11,7 +11,8 @@ import {
   userSongList,
   songList,
   lrc,
-  url
+  url,
+  search
 } from './source'
 
 export default {
@@ -21,7 +22,7 @@ export default {
      * @return:
      */
 
-  getUserSongList (uid) {
+  getUserSongList(uid) {
     return axios.get(userSongList, {
       params: {
         uid: uid
@@ -36,7 +37,7 @@ export default {
      * @return:
      */
 
-  getSongList (id, format) {
+  getSongList(id, format) {
     return axios.get(songList, {
       params: {
         id: id,
@@ -51,7 +52,7 @@ export default {
     * @return:
     */
 
-  getLrc (id) {
+  getLrc(id) {
     return axios.get(lrc, {
       params: {
         id: id
@@ -64,12 +65,32 @@ export default {
   * @param id 音乐ID
   * @return:
   */
-  getUrl (id) {
+  getUrl(id) {
     return axios.get(url, {
       params: {
         id: id
       }
     })
-  }
+  },
 
+  /**
+    * @description: 搜索音乐
+    * @param keywords 关键词
+    * @param type 类型  song singer album songList video radio user lrc
+    * @param pageSize 条数
+    * @return:
+    */
+
+  getSearch(keywords, type, pageSize, page) {
+    return axios.get(search, {
+      params: {
+        keyword: keywords,
+        type: type,
+        pageSize: pageSize,
+        page: page
+      }
+    })
+  },
 }
+
+

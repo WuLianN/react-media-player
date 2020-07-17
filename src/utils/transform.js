@@ -64,7 +64,12 @@ export function snippet17(value) {
 // ['刘德华', '张学友'] -> 刘德华 & 张学友
 export function mapArtist(arr) {
   return arr.map((i, index) => `${i.name}${index === arr.length - 1 ? '' : ' & '}`
-  )}
+  )
+}
+
+export function reverseMapArtist(str){
+  return str.split('&')
+}
 
 export function addZero(index) {
   if (index < 10) {
@@ -77,9 +82,9 @@ export function addZero(index) {
 // 判断对象是否不为 {}
 export function hasProperty(obj) {
   const isObj = Object.prototype.toString.call(obj) === '[object Object]'
-  if (isObj) { 
-      const result = JSON.stringify(obj) === '{}'
-      return !result
+  if (isObj) {
+    const result = JSON.stringify(obj) === '{}'
+    return !result
   }
 }
 

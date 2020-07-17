@@ -13,10 +13,12 @@ const api = {
   userSongList: `${tencent}/songList/user`, // 用户歌单信息
   songList: `${tencent}/songList`, // 音乐歌单
   url: `${tencent}/url`, // 音乐播放地址
-  lrc: `${tencent}/lrc` // 音乐歌词
+  lrc: `${tencent}/lrc`, // 音乐歌词
+  search: `${tencent}/search`, // 搜索
 }
 
 export const userSongList = api.userSongList
 export const songList = api.songList
 export const lrc = api.lrc
 export const url = api.url
+export const search = api.search

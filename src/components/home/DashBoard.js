@@ -4,7 +4,11 @@ import "./DashBoard.css"
 import Found from "../../views/Found"
 import SongList from '../../views/SongList'
 import MoreUserSongList from "../siderbar/MoreUserSongList"
+import SearchList from '../../views/SearchList'
 import NoMatch from '../other/NoMatch'
+
+import Header from './Header'
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -15,40 +19,49 @@ export default function DashBoard() {
     return (
         <div className="dashBoard">
             <Router>
-                <SiderBar />
+                <div className="dashBoard-header"> <Header /></div>
 
-                <div className="dashBoard-content">
-                    <Switch>
-                        <Route path={"/found"}>
-                            <Found />
-                        </Route>
-                        <Route path={"/private"}>
-                            private
-                        </Route>
-                        <Route path={"/live"}>
-                            live
-                        </Route>
-                        <Route path={"/friends"}>
-                            friends
-                        </Route>
-                        <Route path={"/videos"}>
-                            videos
-                        </Route>
+                <div className="dashBoard-main">
+                    <SiderBar />
 
-                        {/* 歌单 */}
-                        <Route path={"/songList/:api/:id"}>
-                            <SongList />
-                        </Route>
-                        
-                        {/* 获取更多歌单 */}
-                        <Route path={"/moreUserSongList"}>
-                            <MoreUserSongList />
-                        </Route>
+                    <div className="dashBoard-content">
+                        <Switch>
+                            <Route path={"/found"}>
+                                <Found />
+                            </Route>
+                            <Route path={"/private"}>
+                                private
+        </Route>
+                            <Route path={"/live"}>
+                                live
+        </Route>
+                            <Route path={"/friends"}>
+                                friends
+        </Route>
+                            <Route path={"/videos"}>
+                                videos
+        </Route>
 
-                        <Route>
-                            <NoMatch />
-                        </Route>
-                    </Switch>
+                            {/* 歌单 */}
+                            <Route path={"/songList/:api/:id"}>
+                                <SongList />
+                            </Route>
+
+                            {/* 获取更多歌单 */}
+                            <Route path={"/moreUserSongList"}>
+                                <MoreUserSongList />
+                            </Route>
+
+                            {/* 搜索页 */}
+                            <Route path={"/search/:word"}>
+                                <SearchList />
+                            </Route>
+
+                            <Route>
+                                <NoMatch />
+                            </Route>
+                        </Switch>
+                    </div>
                 </div>
             </Router>
         </div>

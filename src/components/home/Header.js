@@ -2,6 +2,7 @@ import React from "react"
 import "./Header.css"
 import LoginStatus from '../header/LoginStatus'
 import History from '../header/History'
+import Search from '../header/Search'
 
 
 export default function Header() {
@@ -16,6 +17,9 @@ export default function Header() {
             </div>
 
             <History />
+              
+            <Search />  
+
             <LoginStatus />
         </div>
     )

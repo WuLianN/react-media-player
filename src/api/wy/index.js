@@ -45,16 +45,18 @@ export default {
      * @description: 搜索音乐
      * @param keywords 关键词
      * @param type 类型  song singer album songList video radio user lrc
-     * @param pageSize 条数
+     * @param limit 数量
+     * @param offset 偏移量
      * @return:
      */
 
-  getSearch(keywords, type, limit) {
+  getSearch(keywords, type, limit = 30, offset) {
     return axios.get(search, {
       params: {
         keywords,
         type,
-        limit
+        limit,
+        offset
       }
     })
   },

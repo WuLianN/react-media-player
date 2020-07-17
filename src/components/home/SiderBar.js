@@ -114,7 +114,7 @@ export default function SiderBar() {
 }
 
 function Player() {
-    const { picUrl, artist, songName, api } = useSelector(state => state.updateSong.song)
+    const { picUrl, artist, songName, artistIsArray } = useSelector(state => state.updateSong.song)
     const markImg = require('../../assets/player/enlarge.png')
     const [isShowImg, setIsShowImg] = useState(false)
     const [isShowSongDetail, setIsShowSongDetail] = useState(false)
@@ -138,7 +138,7 @@ function Player() {
                 <img src={markImg} className="player-mark-img" /></div>
             <div className="player-detail">
                 <div className="player-detail-name" onClick={() => showSongDetail(true)}>{songName}</div>
-                <div className="player-detail-artist">{api === 'WY' ? mapArtist(artist) : artist}</div>
+                <div className="player-detail-artist">{mapArtist(artist)}</div>
             </div>
 
             <div style={isShowSongDetail ? { display: 'block' } : { display: 'none' }} className="player-songDetail">
