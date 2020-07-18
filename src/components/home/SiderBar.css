@@ -28,11 +28,11 @@
 .player-mark {
     position: absolute;
     top: 5px;
-    left: 10px;
+    left: 8px;
     width: 45px;
     height: 45px;
     background: rgba(32, 30, 30, 0.385);
-    pointer-events: none
+    pointer-events: none;
 }
 
 .player-mark-img {

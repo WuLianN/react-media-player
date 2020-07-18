@@ -1,12 +1,17 @@
-
 ### 功能
-- [x] 登录
-- [x] 搜索
-- [x] 个性推荐
-- [ ] 歌单
-- [ ] 排行榜
-- [ ] 歌手
 
+* [x] 登录
+* [x] 搜索
+* [x] 个性推荐
+* [ ] 歌单
+* [ ] 排行榜
+* [ ] 歌手
+
+<br>
+
+### 成果
+
+<img width="1025" height="655" align="center" src="https://github.com/WuLianN/react-media-player/blob/marster/src/assets/display/home.png" >
 
 <br>
 

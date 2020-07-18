@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react"
 import api from '../../api/wy/index'
 import './Snippet.css'
 import { useHistory } from "react-router-dom";
+import { createFromIconfontCN } from '@ant-design/icons';
+import { iconFontUrl } from '../../utils/config'
+import { snippetNum } from '../../utils/transform'
+
+const IconFont = createFromIconfontCN({
+    scriptUrl: iconFontUrl, // 在 iconfont.cn 上生成
+});
 
 function getRecommentList() {
     return api.getRecommentList(10)
@@ -16,12 +23,16 @@ function List(props) {
         history.push(`/songList/${api}/${id}`);
     }
 
-    // console.log(props)
+    console.log(props)
     if (props.recommentList) {
         return props.recommentList.map((item, index) =>
             <div className="recommentlist" key={index} onClick={(e) => goSongList(item, e)}>
                 <img className="recommentlist-img" src={item.picUrl} alt={item.name} />
                 <div className="recommentList-title">{item.name}</div>
+                <div className="recommentList-mark">
+                    <IconFont type="iconerji" />
+                    <span>{snippetNum(item.playCount)}</span>
+                </div>
             </div>
         )
     }
