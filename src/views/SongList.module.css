@@ -21,34 +21,47 @@
     font-size: 14px;
 }
 
-.songs100 {
+.songs80 {
     position: relative;
-    width: 100px;
+    width: 80px;
     height: 100%;
     line-height: 30px;
+}
+
+.fontSize12 {
     font-size: 12px;
 }
 
-.songs200 {
+.fontSize14 {
+    font-size: 14px;
+}
+
+.songs180 {
     position: relative;
-    width: 200px;
+    width: 180px;
     height: 100%;
     font-size: 14px;
     line-height: 30px;
 }
 
-.songs300 {
+.songs230 {
     position: relative;
-    width: 300px;
+    width: 230px;
     height: 100%;
     font-size: 14px;
     line-height: 30px;
 }
 
-.bg{
+.bg {
     background: rgb(245, 245, 247);
 }
 
-.color{
+.color {
     color: red;
+}
+
+.overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

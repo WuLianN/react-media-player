@@ -19,18 +19,28 @@ export function Song(props) {
         return dispatch(updateSong(data)) && dispatch(updateIdIndex(idIndexData)) && dispatch(updateSongList({ songList: songs }))
     }
 
-    return songs.map((item, index) => <div
-        className={cn(
-            index === autoIndex && songId === item.id ? styles.color : '',
-            (index + 1) % 2 === 0 ? styles.bg : '', styles.songs)
-        }
-        key={index} onClick={(e) => update(item, index, e)
-        }>
-        <div className={styles.songs75}>{addZero(index + 1)}</div>
-        <div className={styles.songs75}></div>
-        <div className={styles.songs300}>{item.songName}</div>
-        <div className={styles.songs200}>{mapArtist(item.artist)}</div>
-        <div className={styles.songs200}>{item.api === 'WY' ? item.album.name : item.album}</div>
-        <div className={styles.songs100}>{formatSec(item.duration / 1000)}</div>
-    </div >)
+    return <div>
+        <div className={styles.songs}>
+            <div className={styles.songs75}></div>
+            <div className={styles.songs75}></div>
+            <div className={styles.songs230}>歌曲</div>
+            <div className={styles.songs180}>歌手</div>
+            <div className={styles.songs180}>专辑</div>
+            <div className={cn(styles.songs80, styles.fontSize14)}>时长</div>
+        </div >
+
+        {songs.map((item, index) => <div
+            className={cn(index === autoIndex && songId === item.id ? styles.color : '', (index + 1) % 2 === 0 ? styles.bg : '', styles.songs)
+            }
+            key={index} onClick={(e) => update(item, index, e)
+            }>
+            <div className={styles.songs75}>{addZero(index + 1)}</div>
+            <div className={styles.songs75}></div>
+            <div className={cn(styles.songs230, styles.overflow)}>{item.songName}</div>
+            <div className={cn(styles.songs180, styles.overflow)}>{mapArtist(item.artist)}</div>
+            <div className={cn(styles.songs180, styles.overflow)}>{item.api === 'WY' ? item.album.name : item.album}</div>
+            <div className={cn(styles.songs80, styles.fontSize12)}>{formatSec(item.duration / 1000)}</div>
+        </div >)}
+    </div >
 }
+

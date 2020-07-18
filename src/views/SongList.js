@@ -13,7 +13,7 @@ function getSongList_WY(id) {
 }
 
 function getSongList_QQ(id) {
-    return qqApi.getSongList(id, 1)
+    return qqApi.getSongList(id, 0)
 }
 
 export default function SongList() {
@@ -59,21 +59,21 @@ export default function SongList() {
 
             } else if (API === 'QQ') {
                 getSongList_QQ(id).then(res => {
-                    // console.log(res.data)
+                    console.log(res.data)
                     const purifyRes = []
-                    const result = res.data.data
+                    const result = res.data.data[0].songlist
                     result.forEach(item => {
                         purifyRes.push({
-                            id: item.id,
+                            id: item.mid,
                             songName: item.name,
-                            artist: reverseMapArtist(item.singer),
-                            album: '',
+                            artist: item.singer,
+                            album: item.album.name,
                             api: 'QQ',
-                            duration: item.time * 1000,
-                            picUrl: item.pic
+                            duration: item.interval * 1000,
+                            picUrl: ''
                         })
                     })
-                    setSongs(purifyRes)  
+                    setSongs(purifyRes)
                 })
             }
         }, [id, API])
@@ -86,18 +86,29 @@ export default function SongList() {
         }
 
         if (songs) {
-            return songs.map((item, index) => <div
-                className={cn(index === autoIndex && songId === item.id ? styles.color : '', (index + 1) % 2 === 0 ? styles.bg : '', styles.songs)
-                }
-                key={index} onClick={(e) => update(item, index, e)
-                }>
-                <div className={styles.songs75}>{addZero(index + 1)}</div>
-                <div className={styles.songs75}></div>
-                <div className={styles.songs300}>{item.songName}</div>
-                <div className={styles.songs200}>{mapArtist(item.artist)}</div>
-                <div className={styles.songs200}>{item.album.name}</div>
-                <div className={styles.songs100}>{formatSec(item.duration / 1000)}</div>
-            </div >)
+            return <div>
+                <div className={styles.songs}>
+                    <div className={styles.songs75}></div>
+                    <div className={styles.songs75}></div>
+                    <div className={styles.songs230}>歌曲</div>
+                    <div className={styles.songs180}>歌手</div>
+                    <div className={styles.songs180}>专辑</div>
+                    <div className={cn(styles.songs80, styles.fontSize14)}>时长</div>
+                </div >
+
+                {songs.map((item, index) => <div
+                    className={cn(index === autoIndex && songId === item.id ? styles.color : '', (index + 1) % 2 === 0 ? styles.bg : '', styles.songs)
+                    }
+                    key={index} onClick={(e) => update(item, index, e)
+                    }>
+                    <div className={styles.songs75}>{addZero(index + 1)}</div>
+                    <div className={styles.songs75}></div>
+                    <div className={cn(styles.songs230, styles.overflow)}>{item.songName}</div>
+                    <div className={cn(styles.songs180, styles.overflow)}>{mapArtist(item.artist)}</div>
+                    <div className={cn(styles.songs180, styles.overflow)}>{item.api === 'WY' ? item.album.name : item.album}</div>
+                    <div className={cn(styles.songs80, styles.fontSize12)}>{formatSec(item.duration / 1000)}</div>
+                </div >)}
+            </div >
         }
         return null
     }

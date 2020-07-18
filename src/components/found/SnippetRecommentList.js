@@ -23,7 +23,6 @@ function List(props) {
         history.push(`/songList/${api}/${id}`);
     }
 
-    console.log(props)
     if (props.recommentList) {
         return props.recommentList.map((item, index) =>
             <div className="recommentlist" key={index} onClick={(e) => goSongList(item, e)}>
