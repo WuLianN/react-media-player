@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { formatSec, mapArtist, addZero } from '../../utils/transform'
 import cn from 'classnames'
 
-export default function Song(props) {
+export function Song(props) {
     const { songs } = props
 
     const autoIndex = useSelector(state => state.updateAutoIndex.autoIndex)

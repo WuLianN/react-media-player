@@ -2,7 +2,7 @@
 export { Recomment } from './Recomment'
 export { SongList } from './SongList'
 export { RankList } from './RankList'
-export { Songer } from './Songer'
+export { Singer } from './Singer'
 export { Radio } from './Radio'
 export { NewSong } from './NewSong'
 

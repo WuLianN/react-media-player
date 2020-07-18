@@ -3,13 +3,25 @@ import styles from './SearchList.module.css'
 import { useParams } from 'react-router-dom'
 import api from '../api/wy/index'
 import qqApi from '../api/qq/index'
-import List from '../components/search/List'
+import { Song, SongList, Radio, Video, User, Album, Lyric, Singer } from '../components/search/index'
 import axios from 'axios'
+import { Tabs } from 'antd';
 
 export default function SearchList() {
     const { word } = useParams()
     const [songs, setSongs] = useState([])
     const [offset, setOffset] = useState(0)
+    const { TabPane } = Tabs;
+    const tabData = [
+        { name: '单曲', component: 'Song' },
+        { name: '歌手', component: 'Singer' },
+        { name: '专辑', component: 'Album' },
+        { name: '视频', component: 'Video' },
+        { name: '歌单', component: 'SongList' },
+        { name: '歌词', component: 'Lyric' },
+        { name: '主播电台', component: 'Radio' },
+        { name: '用户', component: 'User' }
+    ]
 
     function getSearch_WY(word) {
         const type = 1 // 歌曲
@@ -83,11 +95,32 @@ export default function SearchList() {
         )
     }, [word, offset])
 
+    const switchComponent = (component) => {
+        if (component === 'Song') {
+            return songs && <Song songs={songs} />
+        } else if (component === 'SongList') {
+            return <SongList />
+        } else if (component === 'Singer') {
+            return <Singer />
+        } else if (component === 'Radio') {
+            return <Radio />
+        } else if (component === 'Video') {
+            return <Video />
+        } else if (component === 'User') {
+            return <User />
+        } else if (component === 'Album') {
+            return <Album />
+        }else if (component === 'Lyric') {
+            return <Lyric />
+        }
+    }
+
+    const TabList = tabData.map((item, index) =>
+        <TabPane tab={item.name} key={index + 1}>
+            {switchComponent(item.component)}
+        </TabPane>)
+
     return <div className={styles.searchList}>
-        <div className={styles.searchResult}>
-
-        </div>
-
-        {songs && <List songs={songs} />}
+        <Tabs defaultActiveKey="1" centered>{TabList}</Tabs>
     </div>
 }

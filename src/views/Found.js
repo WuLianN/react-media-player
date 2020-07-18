@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Tabs } from 'antd';
-import { Recomment, Songer, SongList, RankList, Radio, NewSong } from '../components/found/index'
+import { Recomment, Singer, SongList, RankList, Radio, NewSong } from '../components/found/index'
 
 let defaultKey = 1 // 默认
 export const ActiveKeyContext = React.createContext(defaultKey)
@@ -22,7 +22,7 @@ const tabData = [
     { title: "歌单", component: "SongList" },
     { title: "主播电台", component: "Radio" },
     { title: "排行榜", component: "RankList" },
-    { title: "歌手", component: "Songer" },
+    { title: "歌手", component: "Singer" },
     { title: "最新音乐", component: "NewSong" }
 ]
 
@@ -55,8 +55,8 @@ const NavBar = () => {
                 </ActiveKeyContext.Provider>)
         } else if (name === 'SongList') {
             return <SongList />
-        } else if (name === 'Songer') {
-            return <Songer />
+        } else if (name === 'Singer') {
+            return <Singer />
         } else if (name === 'Radio') {
             return <Radio />
         } else if (name === 'RankList') {
@@ -70,14 +70,14 @@ const NavBar = () => {
         setActiveKey(key)
     }
 
-    const tabList = tabData.map((item, index) =>
+    const TabList = tabData.map((item, index) =>
         <TabPane tab={item.title} key={index + 1} >
             {switchComponent(item.component)}
         </TabPane>)
 
     return (
         <Tabs centered activeKey={activeKey} onTabClick={tabUpdateActive}>
-            {tabList}
+            {TabList}
         </Tabs>
     )
 }

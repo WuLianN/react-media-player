@@ -11,6 +11,7 @@ import SongDetail from '../../views/SongDetail'
 import api from "../../api/wy/index";
 import qqApi from '../../api/qq/index'
 import axios from "axios";
+import { tencent, wangyiyun } from '../../api/config/common'
 
 const IconFont = createFromIconfontCN({
     scriptUrl: iconFontUrl, // 在 iconfont.cn 上生成
@@ -114,7 +115,7 @@ export default function SiderBar() {
 }
 
 function Player() {
-    const { picUrl, artist, songName, artistIsArray } = useSelector(state => state.updateSong.song)
+    const { picUrl, artist, songName, api, id } = useSelector(state => state.updateSong.song)
     const markImg = require('../../assets/player/enlarge.png')
     const [isShowImg, setIsShowImg] = useState(false)
     const [isShowSongDetail, setIsShowSongDetail] = useState(false)
@@ -127,9 +128,17 @@ function Player() {
         setIsShowSongDetail(bool)
     }
 
+    function getPic(api, id) {
+        if (api === 'WY') {
+            return `${wangyiyun}/pic?id=${id}}`
+        } else if (api === 'QQ') {
+            return `${tencent}/pic?id=${id}`
+        }
+    }
+
     if (songName || artist || picUrl) {
         return <div className="player">
-            <img className="player-img" src={picUrl} alt={songName}
+            <img className="player-img" src={picUrl ? picUrl : getPic(api, id)} alt={songName}
                 onMouseEnter={() => showMask(true)}
                 onMouseLeave={() => showMask(false)}
                 onClick={() => showSongDetail(true)}
