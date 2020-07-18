@@ -11,7 +11,7 @@
 
 ### 成果
 
-<img width="1025" height="655" align="center" src="https://github.com/WuLianN/react-media-player/blob/marster/src/assets/display/home.png" >
+![](https://github.com/WuLianN/react-media-player/blob/master/src/assets/display/home.png)
 
 <br>
 
