@@ -59,7 +59,6 @@ export default function SongList() {
 
             } else if (API === 'QQ') {
                 getSongList_QQ(id).then(res => {
-                    console.log(res.data)
                     const purifyRes = []
                     const result = res.data.data[0].songlist
                     result.forEach(item => {
@@ -76,7 +75,7 @@ export default function SongList() {
                     setSongs(purifyRes)
                 })
             }
-        }, [id, API])
+        }, [])
 
         function update(item, index, e) {
             e.preventDefault();

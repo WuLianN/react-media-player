@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./SiderBar.css"
 import { Menu } from 'antd';
-import { VideoCameraOutlined, UsergroupDeleteOutlined, SmileOutlined, MenuUnfoldOutlined, ConsoleSqlOutlined } from '@ant-design/icons';
+import { VideoCameraOutlined, UsergroupDeleteOutlined, SmileOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Link, useHistory } from "react-router-dom";
 import { createFromIconfontCN } from '@ant-design/icons';
 import { iconFontUrl } from '../../utils/config'
@@ -11,7 +11,7 @@ import SongDetail from '../../views/SongDetail'
 import api from "../../api/wy/index";
 import qqApi from '../../api/qq/index'
 import axios from "axios";
-import { tencent, wangyiyun } from '../../api/config/common'
+import { getPic } from '../../api/config/other'
 
 const IconFont = createFromIconfontCN({
     scriptUrl: iconFontUrl, // 在 iconfont.cn 上生成
@@ -115,7 +115,7 @@ export default function SiderBar() {
 }
 
 function Player() {
-    const { picUrl, artist, songName, api, id } = useSelector(state => state.updateSong.song)
+    const { picUrl, artist, songName, api, id, album } = useSelector(state => state.updateSong.song)
     const markImg = require('../../assets/player/enlarge.png')
     const [isShowImg, setIsShowImg] = useState(false)
     const [isShowSongDetail, setIsShowSongDetail] = useState(false)
@@ -128,15 +128,8 @@ function Player() {
         setIsShowSongDetail(bool)
     }
 
-    function getPic(api, id) {
-        if (api === 'WY') {
-            return `${wangyiyun}/pic?id=${id}}`
-        } else if (api === 'QQ') {
-            return `${tencent}/pic?id=${id}`
-        }
-    }
-
     if (songName || artist || picUrl) {
+
         return <div className="player">
             <img className="player-img" src={picUrl ? picUrl : getPic(api, id)} alt={songName}
                 onMouseEnter={() => showMask(true)}
@@ -144,14 +137,14 @@ function Player() {
                 onClick={() => showSongDetail(true)}
             />
             <div className="player-mark" style={isShowImg ? { display: 'block' } : { display: 'none' }}>
-                <img src={markImg} className="player-mark-img" /></div>
+                <img src={markImg} className="player-mark-img" alt="mark" /></div>
             <div className="player-detail">
                 <div className="player-detail-name" onClick={() => showSongDetail(true)}>{songName}</div>
                 <div className="player-detail-artist">{mapArtist(artist)}</div>
             </div>
 
             <div style={isShowSongDetail ? { display: 'block' } : { display: 'none' }} className="player-songDetail">
-                <SongDetail showSongDetail={showSongDetail} />
+                {isShowSongDetail && id && <SongDetail isShowImg={isShowImg} showSongDetail={showSongDetail} songData={{ picUrl, artist, songName, api, id, album }} />}
             </div>
         </div>
     }

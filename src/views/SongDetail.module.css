@@ -1,0 +1,137 @@
+.songDetail {
+    width: 1020px;
+    height: 550px;
+    position: relative;
+}
+
+.main {
+    width: 100%;
+    height: 450px;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.mainLeft {
+    width: 400px;
+    height: 450px;
+    position: relative;
+    margin: 0 auto;
+    z-index: 100;
+}
+
+.mainRecordWrap {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainRecord {
+    width: 350px;
+    height: 321px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../assets//player/record.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+.mainRecordImg {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin: -14px 0 0 2px;
+}
+
+.mainControls {
+    width: 350px;
+    height: 50px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 25px;
+}
+
+.mainControlsBox {
+    width: 70px;
+    height: 25px;
+    border: 1px solid rgb(192, 190, 191);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 16px;
+    border-radius: 10%;
+    background: rgb(247, 247, 247);
+}
+
+.mainControlsBox:hover {
+    background: white;
+}
+
+.mainControlsText {
+    font-size: 13px;
+    display: block;
+    width: 30px;
+    height: 25px;
+    line-height: 25px;
+}
+
+.mainRight {
+    width: 450px;
+    height: 450px;
+    padding: 50px 0 0 30px;
+}
+
+.mainSong {
+    width: 100%;
+    height: 100px;
+    /* background: gray; */
+}
+
+.mainSongName {
+    font-size: 24px;
+    font-weight: bold;
+    color: whitesmoke;
+}
+
+.mainSongInfo {
+    width: 300px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    color: white;
+}
+
+.mainOther {
+    width: 120px;
+    height: 450px;
+}
+
+.mainOtherBtn {
+    width: 40px;
+    height: 30px;
+    margin: 50px 0 0 0;
+    border: 1px solid rgb(192, 190, 191);
+    background: white;
+    display: flex;
+    justify-content: center;
+    border-radius: 10%;
+}
+
+.mainOtherBtnImg {
+    font-size: 30px;
+}
+
+.filterImg {
+    position: absolute;
+    z-index: -100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-filter: blur(50px);
+    filter: blur(50px);
+}
