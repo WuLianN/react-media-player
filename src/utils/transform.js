@@ -98,3 +98,11 @@ export function hasProperty(obj) {
 export function getLocalStorageValue(key) {
   return localStorage.getItem(key)
 }
+
+export function reverseFormatSec(formatSec) {
+  const h = parseInt(formatSec[0], 10)
+  const m = parseInt(formatSec[1], 10)
+  const s = parseInt(formatSec[3], 10) * 10 + parseInt(formatSec[4], 10)
+
+  return h * 3600 + m * 60 + s
+}

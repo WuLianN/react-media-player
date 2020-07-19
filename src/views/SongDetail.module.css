@@ -87,14 +87,14 @@
 
 .mainSong {
     width: 100%;
-    height: 100px;
+    height: 70px;
     /* background: gray; */
 }
 
 .mainSongName {
     font-size: 24px;
     font-weight: bold;
-    color: whitesmoke;
+    color: black;
 }
 
 .mainSongInfo {
@@ -128,10 +128,30 @@
 .filterImg {
     position: absolute;
     z-index: -100;
-    top: 0;
+    top: 90px;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 450px;
     -webkit-filter: blur(50px);
     filter: blur(50px);
+}
+
+.infiniteList {
+    height: 405px;
+    overflow: auto;
+    position: relative;
+}
+
+.infiniteListPhantom {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.infiniteListItem {
+    width: 100%;
+    height: 45px;
+    line-height: 50px;
 }
