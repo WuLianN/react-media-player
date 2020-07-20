@@ -25,6 +25,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .footer-size-small {
@@ -78,6 +79,7 @@
     flex-flow: row nowrap;
     justify-content: space-around;
     align-items: center;
+    cursor: pointer;
 }
 
 .footer-volume-img {
@@ -106,6 +108,7 @@
     flex-flow: row nowrap;
     justify-content: space-around;
     align-items: center;
+    cursor: pointer;
 }
 
 .footer-mode-img {
@@ -120,6 +123,7 @@
     flex-flow: row nowrap;
     justify-content: space-around;
     align-items: center;
+    cursor: pointer;
 }
 
 .footer-songListEntrance-logo {

@@ -42,21 +42,21 @@ export default function SongDetail(props) {
         const [listHeight, setListHeight] = useState(0) // 列表总高度
         const itemSize = 45 // 每项高度
         const visialCount = 9 // 可显示的列表项数
-        const start = 0 // 起始索引
-        const end = start + visialCount // 结束索引
         const list = useRef(null)
+        const [start, setStart] = useState(0) // 起始索引
+        const [end, setEnd] = useState(start + visialCount) // 结束索引
         const [middle, setMiddle] = useState(Math.floor((start + end) / 2)) // 中间索引
 
         useEffect(() => {
             const getLyric_WY = async () => {
                 const res = await api.getLrc(id)
-                if (res.data.lrc) {
+                if (res.data.lrc.lyric.length > 0) {
                     const result = res.data.lrc.lyric
                     const resultSplit = result.split('\n')
                     let lyrics = []
                     resultSplit.forEach(ele => {
                         const res = ele.split(']')
-                        if (res[0].length === 9) {
+                        if (res[0].length === 9 || res[0].length === 10) {
                             const time = res[0].slice(1, 6)
                             const lyric = res[1]
 
@@ -81,7 +81,7 @@ export default function SongDetail(props) {
                     resultSplit.forEach(ele => {
                         const res = ele.split(']')
                         // 这样的格式 [00:00:00 才收录
-                        if (res[0].length === 9) {
+                        if (res[0].length === 9 || res[0].length === 10) {
                             const time = res[0].slice(1, 6)
                             const lyric = res[1]
 
@@ -103,7 +103,7 @@ export default function SongDetail(props) {
             } else if (API === 'QQ') {
                 getLyric_QQ()
             }
-        }, [])
+        }, [id])
 
         // 获取currentTime
         const { currentTime } = useSelector(state => state.updateCurrentTime.currentTime)
@@ -117,14 +117,37 @@ export default function SongDetail(props) {
                 if (isProgressControl) {
 
                 } else {
-                    if (formatSecTime === lyric[middle].time) {
-                        getScrollTop(itemSize * (middle - 4))
-                        // 更新middle
-                        setMiddle((middle) => middle + 1)
+                    if (middle < lyric.length) {
+                        const floorCurrentTime = Math.floor(currentTime)
+                        const formatTime = reverseFormatSec(lyric[middle].time)
+
+                        if (floorCurrentTime > formatTime) {
+                            const _middle = lyric.filter((item, index) => {
+                                const formatTime = reverseFormatSec(item.time)
+
+                                return formatTime > floorCurrentTime
+                            })
+
+                            const index = lyric.length - _middle.length - 1
+
+                            const _start = index - Math.floor(visialCount / 2)
+                            setStart(_start)
+                            setEnd(_start + visialCount)
+                            setMiddle(Math.floor((start + end) / 2))
+                        }
+
+                        if (lyric[middle].time && formatSecTime === lyric[middle].time) {
+                            // 偏移
+                            getScrollTop(itemSize * (middle - 4))
+                            // 更新start、end
+                            setStart((start) => start + 1)
+                            setEnd(start + visialCount)
+                            setMiddle(Math.floor((start + end) / 2))
+                        }
                     }
                 }
             }
-        }, [currentTime])
+        }, [currentTime, start, end, middle])
 
         function scrollEvent() {
             //当前滚动位置
@@ -142,8 +165,16 @@ export default function SongDetail(props) {
         }
 
         // 偏移量
-        function getScrollTop(startOffset) {
-            list.current.scrollTop = startOffset
+        function getScrollTop(offset) {
+            list.current.scrollTop = offset
+        }
+
+        function checkIndex(index) {
+            if (index + 1 === lyric.length) {
+                return lyric[index].time
+            } else {
+                return lyric[index + 1].time
+            }
         }
 
         return <div ref={list} className={styles.infiniteList} onScroll={scrollEvent}  >
@@ -152,7 +183,7 @@ export default function SongDetail(props) {
                 currentTime && lyric.map((item, index) => <div key={index} className={styles.infiniteListItem}
                     style={
                         Math.floor(currentTime) >= reverseFormatSec(item.time) &&
-                            Math.floor(currentTime) < reverseFormatSec(lyric[index + 1].time) ? { color: 'white' } : {}
+                            Math.floor(currentTime) < reverseFormatSec(checkIndex(index)) ? { color: 'white' } : {}
                     }
                 >{item.lyric}</div>)
             }

@@ -101,7 +101,8 @@ export default {
   getLrc(id) {
     return axios.get(lrc, {
       params: {
-        id
+        id,
+        timestamp: + new Date()
       }
     })
   },
