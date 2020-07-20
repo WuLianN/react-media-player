@@ -138,6 +138,33 @@
     z-index: 100;
 }
 
+.footer-songList-header{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-songList-header-btn1{
+    width: 80px;
+    height: 25px;
+    text-align: center;
+    background: rgb(124, 125, 133);
+    color: white;
+    border-radius: 10%;
+}
+
+.footer-songList-count{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-indent: 50px;
+    border-top: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(238, 238, 238);
+}
+
 .footer-songList-song {
     position: relative;
     width: 100%;
@@ -149,17 +176,26 @@
 }
 
 .footer-songList-songName {
-    width: 400px;
+    width: 350px;
     height: 30px;
     text-indent: 50px;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .footer-songList-artist {
-    width: 100px;
+    width: 150px;
     height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .footer-songList-duration {
     width: 80px;
     height: 30px;
+    line-height: 30px;
 }

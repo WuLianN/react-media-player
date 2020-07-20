@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Footer.css"
 import { useSelector, useDispatch } from 'react-redux'
-import { userControlAudio, updateAudioStatus, updateIdIndex, updateSong, updateVolume, updateMode } from "../../store/actions";
+import { userControlAudio, updateAudioStatus, updateIdIndex, updateSong, updateVolume, updateMode, updateSongList } from "../../store/actions";
 import { formatSec, mapArtist } from '../../utils/transform'
 import { Slider } from 'antd';
 import Audio from '../Audio'
+import styles from '../../views/SongList.module.css'
+import cn from 'classnames'
 
 export default function Footer() {
     const laba = require('../../assets/player/laba.png')
@@ -190,9 +192,9 @@ export default function Footer() {
     function SongListEntrance() {
         const [showSongList, setShowSongList] = useState(false)
         const { songList } = useSelector(state => state.updateSongList.songList)
-        const { id } = useSelector(state => state.updateSong.song)
 
-        function isShowSongList() {
+        function isShowSongList(e) {
+            e.preventDefault()
             if (showSongList) {
                 setShowSongList(false)
             } else {
@@ -202,13 +204,26 @@ export default function Footer() {
 
         function SongList() {
             const autoIndex = useSelector(state => state.updateAutoIndex.autoIndex)
+            const { id: songId } = useSelector(state => state.updateSong.song)
+
+            function update(item, index, e) {
+                e.stopPropagation();
+                
+                let data = item
+                let idIndexData = { idIndex: index }
+                return dispatch(updateSong(data)) && dispatch(updateIdIndex(idIndexData))
+            }
 
             if (songList) {
                 return (<div className="footer-songList" style={showSongList ? { display: 'block' } : { display: 'none' }}>
-                    <div>播放记录</div>
-                    <div>共{songList.length}首</div>
+                    <div className="footer-songList-header">
+                        <div className="footer-songList-header-btn1">播放列表</div>
+                    </div>
+                    <div className="footer-songList-count">共{songList.length}首</div>
 
-                    {songList.map((item, index) => <div key={index} className="footer-songList-song" style={index === autoIndex && id === item.id ? { color: 'red' } : { color: '' }}>
+                    {songList.map((item, index) => <div key={index}
+                        className={cn(index === autoIndex && songId === item.id ? styles.color : '', (index + 1) % 2 === 0 ? styles.bg : '', styles.songs)
+                        } onClick={(e) => update(item, index, e)}>
                         <span className="footer-songList-songName">{item.songName}</span>
                         <span className="footer-songList-artist">{mapArtist(item.artist)}</span>
                         <span></span>
@@ -219,7 +234,7 @@ export default function Footer() {
             return null
         }
 
-        return <div onClick={isShowSongList} className="footer-songListEntrance" >
+        return <div onClick={ (e) => isShowSongList(e)} className="footer-songListEntrance" >
             <img className="footer-songListEntrance-logo"
                 src={songListLogo} alt="歌单"
                 style={songList ? { display: 'block' } : { display: 'none' }} />

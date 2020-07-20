@@ -2,6 +2,7 @@
 
 * [x] 登录
 * [x] 搜索
+* [x] 歌词
 * [x] 个性推荐
 * [ ] 歌单
 * [ ] 排行榜
@@ -12,6 +13,7 @@
 ### 成果
 
 ![](https://github.com/WuLianN/react-media-player/blob/master/src/assets/display/home.png)
+![](https://github.com/WuLianN/react-media-player/blob/master/src/assets/display/player.png)
 
 <br>
 
@@ -21,6 +23,14 @@
 * redux
 * react-router
 * antd
+
+<br>
+
+### :warning: 声明
+
+ :raised_hand: 本项目仅作为技术研究和项目开发练习，非商业用途 
+ 
+ :u7981: 不允许引用本项目进行商业用途，否则自行承担法律责任
 
 <br>
 

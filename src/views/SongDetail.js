@@ -45,9 +45,6 @@ export default function SongDetail(props) {
         const start = 0 // 起始索引
         const end = start + visialCount // 结束索引
         const list = useRef(null)
-
-        const [control, setControl] = useState(false)
-
         const [middle, setMiddle] = useState(Math.floor((start + end) / 2)) // 中间索引
 
         useEffect(() => {
@@ -59,30 +56,52 @@ export default function SongDetail(props) {
                     let lyrics = []
                     resultSplit.forEach(ele => {
                         const res = ele.split(']')
-                        const time = res[0].slice(1, 6)
-                        const lyric = res[1]
+                        if (res[0].length === 9) {
+                            const time = res[0].slice(1, 6)
+                            const lyric = res[1]
 
-                        lyrics.push({
-                            time: time,
-                            lyric: lyric
-                        })
+                            lyrics.push({
+                                time: time,
+                                lyric: lyric
+                            })
+                        }
                     })
 
                     setLyric(lyrics)
-                    setControl(true)
                     setListHeight(lyrics.length * itemSize)
                 }
             }
 
-            const getLyric_QQ = async (id) => {
-                return qqApi.getLrc(id)
+            const getLyric_QQ = async () => {
+                const res = await qqApi.getLrc(id)
+                if (res.data.length > 0) {
+                    const result = res.data
+                    const resultSplit = result.split('\n')
+                    let lyrics = []
+                    resultSplit.forEach(ele => {
+                        const res = ele.split(']')
+                        // 这样的格式 [00:00:00 才收录
+                        if (res[0].length === 9) {
+                            const time = res[0].slice(1, 6)
+                            const lyric = res[1]
+
+                            lyrics.push({
+                                time: time,
+                                lyric: lyric
+                            })
+                        }
+                    })
+
+                    setLyric(lyrics)
+                    setListHeight(lyrics.length * itemSize)
+                }
             }
 
             // 获取歌词
             if (API === 'WY') {
                 getLyric_WY()
             } else if (API === 'QQ') {
-
+                getLyric_QQ()
             }
         }, [])
 
@@ -92,7 +111,7 @@ export default function SongDetail(props) {
         const isProgressControl = false // 进度条控制，进度条操控currentTime，还没有实现，先留个口
 
         useEffect(() => {
-            if (control) {
+            if (lyric.length > 0) {
                 const formatSecTime = formatSec(Math.floor(currentTime))
 
                 if (isProgressControl) {
@@ -130,7 +149,7 @@ export default function SongDetail(props) {
         return <div ref={list} className={styles.infiniteList} onScroll={scrollEvent}  >
             <div className={styles.infiniteListPhantom} style={{ height: listHeight + 'px' }}></div>
             {
-                lyric.map((item, index) => <div key={index} className={styles.infiniteListItem}
+                currentTime && lyric.map((item, index) => <div key={index} className={styles.infiniteListItem}
                     style={
                         Math.floor(currentTime) >= reverseFormatSec(item.time) &&
                             Math.floor(currentTime) < reverseFormatSec(lyric[index + 1].time) ? { color: 'white' } : {}
@@ -170,8 +189,8 @@ export default function SongDetail(props) {
                 <div className={styles.mainSong}>
                     <div className={styles.mainSongName}>{songName}</div>
                     <div className={styles.mainSongInfo}>
-                        <span>专辑：{API === 'WY' ? album.name : album}</span>
-                        <span>歌手：{mapArtist(artist)}</span>
+                        <span className={styles.mainSongInfoText1}>专辑：{API === 'WY' ? album.name : album}</span>
+                        <span className={styles.mainSongInfoText2}>歌手：{mapArtist(artist)}</span>
                     </div>
                 </div>
 

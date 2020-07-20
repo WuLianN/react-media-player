@@ -57,9 +57,11 @@ export default function Audio() {
 
             audio.current.ontimeupdate = () => {
                 const currentTime = audio.current.currentTime
-                const data = { currentTime }
-                // 更新当前歌曲进度
-                dispatch(updateCurrentTime(data))
+                if(currentTime){
+                    const data = { currentTime }
+                    // 更新当前歌曲进度
+                    dispatch(updateCurrentTime(data))
+                }
             }
 
             audio.current.onerror = () => {

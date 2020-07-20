@@ -82,7 +82,7 @@
 .mainRight {
     width: 450px;
     height: 450px;
-    padding: 50px 0 0 30px;
+    padding: 45px 0 0 30px;
 }
 
 .mainSong {
@@ -92,17 +92,32 @@
 }
 
 .mainSongName {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
     color: black;
 }
 
 .mainSongInfo {
-    width: 300px;
+    width: 400px;
+    font-size: 13px;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-between;
-    color: white;
+}
+
+.mainSongInfoText1 {
+    display: block;
+    width: 245px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mainSongInfoText2 {
+    display: block;
+    width: 155px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .mainOther {
