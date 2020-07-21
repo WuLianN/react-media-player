@@ -10,14 +10,12 @@ export default function Search() {
 
     // 聚焦 -> 监听
     function focus() {
-        console.log('focus')
         input.current.placeholder = ''
         window.addEventListener('keydown', debounce)
     }
 
     // 离焦 -> 取消监听
     function blur() {
-        console.log('blur')
         input.current.placeholder = '搜索音乐，视频，歌词，电台'
         window.removeEventListener('keydown', debounce)
     }

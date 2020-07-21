@@ -19,7 +19,9 @@ export default function DashBoard() {
     return (
         <div className="dashBoard">
             <Router>
-                <div className="dashBoard-header"> <Header /></div>
+                <div className="dashBoard-header">
+                    <Header />
+                </div>
 
                 <div className="dashBoard-main">
                     <SiderBar />
@@ -31,16 +33,16 @@ export default function DashBoard() {
                             </Route>
                             <Route path={"/private"}>
                                 private
-        </Route>
+                            </Route>
                             <Route path={"/live"}>
                                 live
-        </Route>
+                            </Route>
                             <Route path={"/friends"}>
                                 friends
-        </Route>
+                            </Route>
                             <Route path={"/videos"}>
                                 videos
-        </Route>
+                           </Route>
 
                             {/* 歌单 */}
                             <Route path={"/songList/:api/:id"}>
@@ -56,7 +58,8 @@ export default function DashBoard() {
                             <Route path={"/search/:word"}>
                                 <SearchList />
                             </Route>
-
+                             
+                            {/* 404 */}
                             <Route>
                                 <NoMatch />
                             </Route>

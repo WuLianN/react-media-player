@@ -37,6 +37,7 @@
     flex-flow: row nowrap;
     justify-content: space-around;
     align-items: center;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
 }
 
 .exclusive {

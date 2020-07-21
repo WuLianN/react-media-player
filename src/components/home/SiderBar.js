@@ -244,7 +244,7 @@ function Sider(props) {
                 < Menu.Item key="100">
                     <Link to={"/moreUserSongList"} >
                         <SmileOutlined />
-                        <span>更多获取歌单？</span>
+                        <span>获取更多歌单？</span>
                     </Link>
                 </Menu.Item>
 
