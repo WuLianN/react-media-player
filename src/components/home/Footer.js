@@ -72,9 +72,9 @@ export default function Footer() {
             }
         }
         return <div className="footer-controls">
-            <div className="footer-controls-icon footer-size-small"><img className="footer-controls-img1" onClick={prevSong} src={prev} alt="prev" /></div>
-            <div className="footer-controls-icon footer-size-middle"><img className="footer-controls-img2" onClick={statusControls} ref={imgStatus} src={play} alt="status" /></div>
-            <div className="footer-controls-icon footer-size-small"><img className="footer-controls-img1" onClick={nextSong} src={next} alt="next" /></div>
+            <div className="footer-controls-icon footer-size-small" onClick={prevSong} ><img className="footer-controls-img1" src={prev} alt="prev" /></div>
+            <div className="footer-controls-icon footer-size-middle" onClick={statusControls}><img className="footer-controls-img2" ref={imgStatus} src={play} alt="status" /></div>
+            <div className="footer-controls-icon footer-size-small" onClick={nextSong} ><img className="footer-controls-img1" src={next} alt="next" /></div>
         </div>
     }
 
