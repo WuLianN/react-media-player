@@ -12,7 +12,7 @@ const IconFont = createFromIconfontCN({
 
 export function SongList() {
     const navArr = ['热门标签：', '华语', '|', '流行', '|', '摇滚', '|', '民谣', '|', '电子', '|', '另类/独立', '|', '轻音乐', '|', '综艺', '|', '影视原音', '|', 'ACG']
-    const hotType = ['华语', '流行', '摇滚', '民谣', '电子', '另类/独立', '轻音乐', '综艺', '影视原音', 'ACG']
+    const hotType = ['华语', '流行', '摇滚', '民谣', '电子', '另类/独立', '轻音乐', '综艺', '影视原声', 'ACG']
     const [playlists, setPlaylists] = useState([])
     const history = useHistory();
     const [type, setType] = useState('华语') // 默认type

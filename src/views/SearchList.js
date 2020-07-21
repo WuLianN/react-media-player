@@ -78,7 +78,7 @@ export default function SearchList() {
                 // 数组中的对象去重
                 let obj = {}
                 const r4 = r3.reduce((cur, next) => {
-                    if (obj[next.songName] !== '') {
+                    if (obj[next.songName] === undefined) {
                         obj[next.songName] = true
                         cur.push(next)
                     }
@@ -89,6 +89,7 @@ export default function SearchList() {
                     const allSongs = songs.concat(r4) // 偏移量
                     setSongs(allSongs)
                 } else {
+                    console.log(r4)
                     setSongs(r4)
                 }
             })
