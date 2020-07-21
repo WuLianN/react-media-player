@@ -17,6 +17,7 @@ export const USER_CONTROL_AUDIO = { // 手动控制 音乐播放器状态 （播
 }
 
 export const UPDATE_CURRENT_TIME = 'UPDATE_CURRENT_TIME' // 更新歌曲当前进度
+export const UPDATE_SLIDER_TIME = 'UPDATE_SLIDER_TIME' // slider 手动控制 currentTime
 export const UPDATE_VOLUME = 'UPDATE_VOLUME'// 更新音量
 export const UPDATE_MODE = { // 更新模式
     SONGLIST_LOOP: 'songListLoop',
@@ -62,6 +63,10 @@ export function userControlAudio(playload) {
 
 export function updateCurrentTime(playload) {
     return { type: UPDATE_CURRENT_TIME, playload }
+}
+
+export function updateSlideTime(playload) {
+    return { type: UPDATE_SLIDER_TIME, playload }
 }
 
 export function updateVolume(playload) {

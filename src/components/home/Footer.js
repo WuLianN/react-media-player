@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Footer.css"
 import { useSelector, useDispatch } from 'react-redux'
-import { userControlAudio, updateAudioStatus, updateIdIndex, updateSong, updateVolume, updateMode, updateSongList } from "../../store/actions";
+import { userControlAudio, updateAudioStatus, updateIdIndex, updateSong, updateVolume, updateMode, updateSongList, updateSlideTime } from "../../store/actions";
 import { formatSec, mapArtist } from '../../utils/transform'
 import { Slider } from 'antd';
 import Audio from '../Audio'
@@ -83,10 +83,18 @@ export default function Footer() {
         const { duration } = useSelector(state => state.updateSong.song)
         const { currentTime } = useSelector(state => state.updateCurrentTime.currentTime)
 
+        const dispatch = useDispatch()
+
+        function mouseUp(value) {
+            dispatch(updateSlideTime({ sliderTime: value }))
+        }
+
         return <div className="footer-duration">
             <span>{currentTime ? formatSec(currentTime) : '00:00'}</span>
             <Slider className="footer-duration-slider"
-                tipFormatter={formatSec} min={0} max={Math.floor(duration / 1000)} value={currentTime}
+                tipFormatter={formatSec} min={0} max={Math.floor(duration / 1000)}
+                value={currentTime}
+                onChange={mouseUp}
             />
             <span>{duration ? formatSec(duration / 1000) : '00:00'}</span>
         </div>
@@ -208,7 +216,7 @@ export default function Footer() {
 
             function update(item, index, e) {
                 e.stopPropagation();
-                
+
                 let data = item
                 let idIndexData = { idIndex: index }
                 return dispatch(updateSong(data)) && dispatch(updateIdIndex(idIndexData))
@@ -234,7 +242,7 @@ export default function Footer() {
             return null
         }
 
-        return <div onClick={ (e) => isShowSongList(e)} className="footer-songListEntrance" >
+        return <div onClick={(e) => isShowSongList(e)} className="footer-songListEntrance" >
             <img className="footer-songListEntrance-logo"
                 src={songListLogo} alt="歌单"
                 style={songList ? { display: 'block' } : { display: 'none' }} />

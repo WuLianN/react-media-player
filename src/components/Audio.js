@@ -21,6 +21,7 @@ export default function Audio() {
     const audio = useRef(null)
     const volume = useSelector(state => state.updateVolume.volume) // 音量
     const mode = useSelector(state => state.updateMode.mode) // 播放模式
+    const sliderTime = useSelector(state => state.updateSliderTime.sliderTime) // 更改进度条的时间
 
     useEffect(() => {
         if (id) {
@@ -81,6 +82,12 @@ export default function Audio() {
             }
         }
     }, [autoIndex])
+
+    // 用户更新进度条的时间
+    useEffect(() => {
+        // 将要播放的时间赋给audio
+        audio.current.currentTime = sliderTime
+    }, [sliderTime])
 
     // 控制音量 footer -> audio
     useEffect(() => {

@@ -10,6 +10,7 @@ import {
     UPDATE_AUDIO_STATUS,
     USER_CONTROL_AUDIO,
     UPDATE_CURRENT_TIME,
+    UPDATE_SLIDER_TIME,
     UPDATE_VOLUME,
     UPDATE_MODE
 } from './actions'
@@ -112,6 +113,19 @@ const audioReducer = {
                 return {
                     state,
                     currentTime: action.playload
+                }
+            default:
+                return state
+        }
+    },
+
+    // 更新slider time
+    updateSliderTime(state = { sliderTime: 0 }, action) {
+        switch (action.type) {
+            case UPDATE_SLIDER_TIME:
+                return {
+                    state,
+                    sliderTime: action.playload.sliderTime
                 }
             default:
                 return state
