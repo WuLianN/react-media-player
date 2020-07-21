@@ -12,6 +12,15 @@
     background: rgb(235, 236, 237) !important;
 }
 
+.songs65 {
+    position: relative;
+    width: 65px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+}
+
 .songs75 {
     position: relative;
     width: 75px;
@@ -26,6 +35,15 @@
     width: 80px;
     height: 100%;
     line-height: 30px;
+}
+
+.songs95 {
+    position: relative;
+    width: 95px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    text-indent: 20px;
 }
 
 .fontSize12 {

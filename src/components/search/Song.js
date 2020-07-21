@@ -21,12 +21,12 @@ export function Song(props) {
 
     return <div>
         <div className={styles.songs}>
-            <div className={styles.songs75}></div>
-            <div className={styles.songs75}></div>
+            <div className={styles.songs65}></div>
+            <div className={styles.songs95} style={{ textIndent: '16px' }}>来源</div>
             <div className={styles.songs230}>歌曲</div>
             <div className={styles.songs180}>歌手</div>
             <div className={styles.songs180}>专辑</div>
-            <div className={cn(styles.songs80, styles.fontSize14)}>时长</div>
+            <div className={cn(styles.songs75, styles.fontSize14)}>时长</div>
         </div >
 
         {songs.map((item, index) => <div
@@ -34,12 +34,12 @@ export function Song(props) {
             }
             key={index} onClick={(e) => update(item, index, e)
             }>
-            <div className={styles.songs75}>{addZero(index + 1)}</div>
-            <div className={styles.songs75}></div>
+            <div className={styles.songs65}>{addZero(index + 1)}</div>
+            <div className={styles.songs95}>{item.api === 'WY' ? '网易云' : 'QQ'}</div>
             <div className={cn(styles.songs230, styles.overflow)}>{item.songName}</div>
             <div className={cn(styles.songs180, styles.overflow)}>{mapArtist(item.artist)}</div>
             <div className={cn(styles.songs180, styles.overflow)}>{item.api === 'WY' ? item.album.name : item.album}</div>
-            <div className={cn(styles.songs80, styles.fontSize12)}>{formatSec(item.duration / 1000)}</div>
+            <div className={cn(styles.songs75, styles.fontSize12)}>{formatSec(item.duration / 1000)}</div>
         </div >)}
     </div >
 }

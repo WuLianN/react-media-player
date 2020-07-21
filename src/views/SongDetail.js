@@ -122,7 +122,7 @@ export default function SongDetail(props) {
                         const formatTime = reverseFormatSec(lyric[middle].time)
 
                         if (floorCurrentTime > formatTime) {
-                            const _middle = lyric.filter((item, index) => {
+                            const _middle = lyric.filter(item => {
                                 const formatTime = reverseFormatSec(item.time)
 
                                 return formatTime > floorCurrentTime

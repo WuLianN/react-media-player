@@ -36,24 +36,29 @@
 
 ### 本地玩转
 
-下载 / 运行 NeteaseCloudMusicApi
+下载依赖
 
 ``` 
-git clone git@github.com:Binaryify/NeteaseCloudMusicApi.git
+本项目依赖
+npm install / yarn install
 
-npm install
-
-node app
-```
-
-下载 / 运行 音乐播放器
-
-``` 
-git clone https://github.com/WuLianN/react-media-player.git
+api 包依赖
+cd NeteaseCloudMusicApi
 
 npm install / yarn install
 
-npm run start / yarn start
+```
+
+运行 音乐播放器
+
+``` 
+- 快速 -
+vs code 编辑器下面有npm scripts
+
+运行这两个命令
+start 
+backend 
+
 ```
 
 <br>
