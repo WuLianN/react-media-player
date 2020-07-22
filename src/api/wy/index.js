@@ -37,7 +37,9 @@ import {
   exclusiveVideo,
   cellPhoneLogin,
   loginStatus,
-  userDetail
+  userDetail,
+  recommentSongs,
+  recommentSongList
 } from './source'
 
 export default {
@@ -466,6 +468,22 @@ export default {
     return axios.get(userDetail, {
       params: { uid }
     })
+  },
+
+  /**
+   * @description: 每日推荐歌曲
+   * @return:
+   */
+  getRecommentSongs() {
+    return axios.get(recommentSongs)
+  },
+
+  /**
+  * @description: 每日推荐歌单
+  * @return:
+  */
+  getRecommentSongList() {
+    return axios.get(recommentSongList)
   }
 }
 

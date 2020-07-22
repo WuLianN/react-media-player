@@ -46,7 +46,9 @@ const api = {
   exclusiveVideo: `${proxyUrl}/personalized/privatecontent/list`, // 独家放送列表
   cellPhoneLogin: `${proxyUrl}/login/cellphone`, // 手机登录
   loginStatus: `${proxyUrl}/login/status`, // 登录状态
-  userDetail: `${proxyUrl}/user/detail` // 用户详情
+  userDetail: `${proxyUrl}/user/detail`, // 用户详情
+  recommentSongs: `${proxyUrl}/recommend/songs`, // 每日推荐歌曲
+  recommentSongList: `${proxyUrl} /recommend/resource` // 每日推荐歌单 
 }
 
 export const search = api.search
@@ -80,3 +82,5 @@ export const exclusiveVideo = api.exclusiveVideo
 export const cellPhoneLogin = api.cellPhoneLogin
 export const loginStatus = api.loginStatus
 export const userDetail = api.userDetail
+export const recommentSongs = api.recommentSongs
+export const recommentSongList = api.recommentSongList

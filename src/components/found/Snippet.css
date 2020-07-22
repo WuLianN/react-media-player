@@ -14,6 +14,27 @@
     cursor: pointer;
 }
 
+.recommentList-border {
+    border: 1px solid rgb(229, 229, 229);
+}
+
+.recommentList-day {
+    width: 100%;
+    height: 30px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.recommentList-date {
+    width: 100%;
+    height: 105px;
+    line-height: 85px;
+    text-align: center;
+    color: rgb(198, 47, 47);
+    font-size: 90px;
+    font-weight: 600;
+}
+
 .recommentlist-img {
     position: relative;
     width: 100%;
@@ -23,9 +44,10 @@
 .recommentList-title {
     width: 100%;
     font-size: 13px;
+    padding: 2px 0 0 0;
 }
 
-.recommentList-mark{
+.recommentList-mark {
     position: absolute;
     top: 0;
     right: 0;

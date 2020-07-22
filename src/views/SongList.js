@@ -28,20 +28,11 @@ export default function SongList() {
 
         useEffect(() => {
             if (API === 'WY') {
-                getSongList_WY(id).then(res => {
-                    const songList = res.data.playlist
-                    const { trackIds } = songList
-
-                    // 登录后能获取全部歌曲，否则用trackIds中的所有id去调用url的接口
-                    const ids = trackIds.map(item => {
-                        return item.id
-                    })
-
-                    const standardIds = ids.toString()
-
-                    api.getSongDetail(standardIds).then(res => {
-                        const purifyRes = []
-                        const result = res.data.songs
+                if (id === '-1') {
+                    const getRecommentSongs = async () => {
+                        const res = await api.getRecommentSongs()
+                        const result = res.data.data.dailySongs
+                        let purifyRes = []
                         result.forEach(item => {
                             purifyRes.push({
                                 id: item.id,
@@ -54,9 +45,38 @@ export default function SongList() {
                             })
                         })
                         setSongs(purifyRes)
-                    })
-                })
+                    }
+                    getRecommentSongs()
+                } else {
+                    getSongList_WY(id).then(res => {
+                        const songList = res.data.playlist
+                        const { trackIds } = songList
 
+                        // 登录后能获取全部歌曲，否则用trackIds中的所有id去调用url的接口
+                        const ids = trackIds.map(item => {
+                            return item.id
+                        })
+
+                        const standardIds = ids.toString()
+
+                        api.getSongDetail(standardIds).then(res => {
+                            let purifyRes = []
+                            const result = res.data.songs
+                            result.forEach(item => {
+                                purifyRes.push({
+                                    id: item.id,
+                                    songName: item.name,
+                                    artist: item.ar,
+                                    album: item.al,
+                                    api: 'WY',
+                                    duration: item.dt,
+                                    picUrl: item.al.picUrl
+                                })
+                            })
+                            setSongs(purifyRes)
+                        })
+                    })
+                }
             } else if (API === 'QQ') {
                 getSongList_QQ(id).then(res => {
                     const purifyRes = []

@@ -3,13 +3,28 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './Form.css'
 import React from 'react'
 import api from '../../api/wy/index'
+import { useHistory } from 'react-router-dom'
+import { message } from 'antd';
 
-const NormalLoginForm = () => {
+const NormalLoginForm = (props) => {
+    const { closeLogin } = props
+    const history = useHistory()
     const onFinish = values => {
         // 手机登录
-        api.cellPhoneLogin(values).then(res => {
-            console.log(res)
-        })
+        api.cellPhoneLogin(values)
+            .then(res => {
+                const hasLogin = res.data.cookie
+                if (hasLogin) {
+                    message.success('登录成功！');
+                    history.push('/found')
+
+                    // 关闭 login 页面
+                    return closeLogin(true)
+                }
+            })
+            .catch(err => {
+                message.error('登录失败！');
+            })
     };
 
     return (

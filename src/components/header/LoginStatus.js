@@ -36,7 +36,9 @@ export default function LoginStatus() {
     }, [hasLogin_WY])
 
     function isShowLogin(bool, e) {
-        e.preventDefault();
+        if (e) {
+            e.preventDefault()
+        }
 
         if (hasLogin_WY && !showLogin) {
             // 已登录 -> 显示profile页面

@@ -5,14 +5,11 @@ import { useHistory } from "react-router-dom";
 import { createFromIconfontCN } from '@ant-design/icons';
 import { iconFontUrl } from '../../utils/config'
 import { snippetNum } from '../../utils/transform'
+import cookie from '../../utils/cookie'
 
 const IconFont = createFromIconfontCN({
     scriptUrl: iconFontUrl, // 在 iconfont.cn 上生成
 });
-
-function getRecommentList() {
-    return api.getRecommentList(10)
-}
 
 function List(props) {
     let history = useHistory();
@@ -23,7 +20,53 @@ function List(props) {
         history.push(`/songList/${api}/${id}`);
     }
 
+    const day2cn = {
+        '1': '一',
+        '2': '二',
+        '3': '三',
+        '4': '四',
+        '5': '五',
+        '6': '六',
+        '7': '日',
+    }
+
     if (props.recommentList) {
+        // 检查是否登录 -> 获取每日推荐歌曲
+        const hasLogin = cookie.getCookie('MUSIC_U')
+        if (hasLogin) {
+            // 去掉一个 补为 每日推荐
+            const day = new Date().getDay()
+            const date = new Date().getDate()
+            const recommentData = {
+                api: 'WY',
+                id: -1
+            }
+
+            return (
+                <>
+                    <div className="recommentlist" onClick={(e) => goSongList(recommentData, e)}>
+                        <div className="recommentlist-img recommentList-border">
+                            <div className="recommentList-day">星期{day2cn[day]}</div>
+                            <div className="recommentList-date">{date}</div>
+                        </div>
+                        <div className="recommentList-title">每日推荐歌曲</div>
+                    </div>
+                    {props.recommentList.map((item, index) => {
+                        if (index < props.recommentList.length - 1) {
+                            return <div className="recommentlist" key={index} onClick={(e) => goSongList(item, e)}>
+                                <img className="recommentlist-img" src={item.picUrl} alt={item.name} />
+                                <div className="recommentList-title">{item.name}</div>
+                                <div className="recommentList-mark">
+                                    <IconFont type="iconerji" />
+                                    <span>{snippetNum(item.playCount)}</span>
+                                </div>
+                            </div>
+                        }
+
+                    })}
+                </>)
+        }
+
         return props.recommentList.map((item, index) =>
             <div className="recommentlist" key={index} onClick={(e) => goSongList(item, e)}>
                 <img className="recommentlist-img" src={item.picUrl} alt={item.name} />
@@ -43,7 +86,8 @@ export function SnippetRecommentList() {
     const [recommentList, setRecommentList] = useState(null)
 
     useEffect(() => {
-        getRecommentList().then(res => {
+        async function getRecommentList(count) {
+            const res = await api.getRecommentList(count)
             const data = res.data.result
             let packData = []
             data.forEach(item => {
@@ -60,9 +104,14 @@ export function SnippetRecommentList() {
                 packData.push(pack)
             })
             setRecommentList(packData)
-        })
+        }
+
+        getRecommentList(10)
+
     }, [])
 
-    return (<div className="recommentList-wrap"><List recommentList={recommentList} /></div>)
+    return (<div className="recommentList-wrap">
+        <List recommentList={recommentList} />
+    </div>)
 
 }

@@ -6,6 +6,11 @@ import './Login.css'
 
 export default function Login(props) {
     const { isShowLogin } = props
+    const closeLogin = (bool) => {
+        if (bool) {
+            return isShowLogin(false)
+        }
+    }
 
     const phoneLogin = require('../../assets/logo/phone-login.png')
     const neteaseLogoTitle = require('../../assets/logo/netease-logo-title.png')
@@ -16,6 +21,6 @@ export default function Login(props) {
             <Button onClick={e => isShowLogin(false, e)} shape="circle" icon={<CloseOutlined />} />
         </div>
         <img className="header-login-logo" src={phoneLogin} alt="网易云" />
-        <Form />
+        <Form closeLogin={closeLogin} />
     </div>
 }
