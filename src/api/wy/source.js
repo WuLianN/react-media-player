@@ -6,7 +6,14 @@
  * @LastEditors: Please set LastEditors
  */
 
-const proxyUrl = '/Netease'
+let env = process.env.REACT_APP_ENV
+let proxyUrl
+
+if (env === 'DEV') {
+  proxyUrl = '/Netease'
+} else if (env === 'PROD') {
+  proxyUrl = 'http://localhost:3001'
+}
 
 const api = {
   // 网易云音乐

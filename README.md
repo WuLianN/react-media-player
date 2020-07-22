@@ -36,7 +36,7 @@
 
 ### 本地玩转
 
-下载依赖
+:electric_plug: 下载依赖
 
 ``` 
 本项目依赖
@@ -46,18 +46,25 @@ api 包依赖
 cd NeteaseCloudMusicApi
 
 npm install / yarn install
-
 ```
 
-运行 音乐播放器
+:running: 运行
+
+:turtle: **快速 (开发)**
 
 ``` 
-- 快速 -
-vs code 编辑器下面有npm scripts
-
-运行这两个命令
-start 
 backend 
+start 
+```
+
+:rocket: **高速 (生产)**
+
+``` 
+1. 需要安装 http-server -> npm install --global http-server
+2. 需要打包 build (只需一次)
+
+3. backend
+4. http-server 
 
 ```
 

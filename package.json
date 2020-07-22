@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "author": "WuLianN",
-  "homepage": "/",
+  "homepage": "./",
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "@testing-library/jest-dom": "^4.2.4",
@@ -22,8 +22,9 @@
     "redux": "^4.0.5"
   },
   "scripts": {
-    "start": "react-scripts start",
     "backend": "node ./NeteaseCloudMusicApi/app",
+    "http-server": "http-server build -p 3002 -o",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
