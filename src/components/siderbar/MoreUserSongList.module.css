@@ -8,7 +8,7 @@
 .main {
     width: 400px;
     height: 300px;
-    background: rgba(0, 0, 0, 0.534);
+    background: linear-gradient(rgba(0, 0, 0, 0.534), rgba(0, 0, 0, 0));
     box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.295);
     margin: 0 auto;
     position: relative;
@@ -32,8 +32,16 @@
     display: inline-block;
     width: 200px;
     height: 35px;
+    outline: none;
 }
 
 .button {
     width: 80px;
+}
+
+.alert {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
