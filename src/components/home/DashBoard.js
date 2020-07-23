@@ -6,6 +6,7 @@ import SongList from '../../views/SongList'
 import MoreUserSongList from "../siderbar/MoreUserSongList"
 import SearchList from '../../views/SearchList'
 import Video from '../../views/Video'
+import FM from '../../views/FM'
 import NoMatch from '../other/NoMatch'
 import Header from './Header'
 
@@ -32,10 +33,7 @@ export default function DashBoard() {
                                 <Found />
                             </Route>
                             <Route path={"/private"}>
-                                private
-                            </Route>
-                            <Route path={"/live"}>
-                                live
+                                <FM />
                             </Route>
                             <Route path={"/friends"}>
                                 friends

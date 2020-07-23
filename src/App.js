@@ -11,20 +11,20 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    function getLoginStatus() {
+      // 网易云音乐账号登录？
+      const name = 'MUSIC_U'
+      // 获取cookie
+      const value = cookie.getCookie(name)
+      // cookie 状态 
+      const bool = Boolean(value)
+
+      // 存储 cookie 状态 -> redux
+      dispatch(updateLoginStatus({ hasLogin_WY: bool, platform: 'WY' }))
+    }
+
     getLoginStatus()
   }, [])
-
-  function getLoginStatus() {
-    // 网易云音乐账号登录？
-    const name = 'MUSIC_U'
-    // 获取cookie
-    const value = cookie.getCookie(name)
-    // cookie 状态 
-    const bool = Boolean(value)
-
-    // 存储 cookie 状态 -> redux
-    dispatch(updateLoginStatus({ hasLogin_WY: bool, platform: 'WY' }))
-  }
 
   return (
     <div className="App">

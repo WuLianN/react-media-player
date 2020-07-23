@@ -50,7 +50,8 @@ const api = {
   recommentSongs: `${proxyUrl}/recommend/songs`, // 每日推荐歌曲
   recommentSongList: `${proxyUrl}/recommend/resource`, // 每日推荐歌单 
   recommentMv: `${proxyUrl}/personalized/mv`, // 推荐 mv
-  mvDetail: `${proxyUrl}/mv/detail` //   获取 mv 数据
+  mvDetail: `${proxyUrl}/mv/detail`, //   获取 mv 数据
+  fm: `${proxyUrl}/personal_fm`
 }
 
 export const search = api.search
@@ -88,3 +89,4 @@ export const recommentSongs = api.recommentSongs
 export const recommentSongList = api.recommentSongList
 export const recommentMv = api.recommentMv
 export const mvDetail = api.mvDetail
+export const fm = api.fm

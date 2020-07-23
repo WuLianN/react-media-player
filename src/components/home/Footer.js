@@ -258,7 +258,3 @@ export default function Footer() {
         </div>
     )
 }
-
-// 注：进度条不能操控 currentTime
-// 因为：antd Slider 组件做进度条，没那么好使。
-// 所以：有时间，在写个进度条

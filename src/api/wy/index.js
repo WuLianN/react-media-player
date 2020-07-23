@@ -41,7 +41,8 @@ import {
   recommentSongs,
   recommentSongList,
   recommentMv,
-  mvDetail
+  mvDetail,
+  fm
 } from './source'
 
 export default {
@@ -506,6 +507,14 @@ export default {
         mvid
       }
     })
+  },
+
+  /**
+  * @description: 私人fm
+  * @return:
+  */
+  getFM() {
+    return axios.get(fm)
   }
 }
 

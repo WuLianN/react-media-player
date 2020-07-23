@@ -16,7 +16,7 @@ export default function Audio() {
     const idIndex = useSelector(state => state.updateIdIndex.idIndex)
     const autoIndex = useSelector(state => state.updateAutoIndex.autoIndex)
     const audioStatus = useSelector(state => state.updateAudioStatus.audioStatus)
-    const { userControl } = useSelector(state => state.userControlAudio.userControl)
+    const userControl = useSelector(state => state.userControlAudio.userControl)
     const dispatch = useDispatch()
     const audio = useRef(null)
     const volume = useSelector(state => state.updateVolume.volume) // 音量

@@ -200,18 +200,12 @@ function Sider(props) {
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="3">
-                    <Link to={"/live"}>
-                        <IconFont type="iconLivelinkBI" />
-                        <span>LOOK直播</span>
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key="4">
                     <Link to={"/videos"}>
                         <VideoCameraOutlined />
                         <span>视频</span>
                     </Link>
                 </Menu.Item>
-                <Menu.Item key="5">
+                <Menu.Item key="4">
                     <Link to={"/friends"}>
                         <UsergroupDeleteOutlined />
                         <span>朋友</span>
@@ -219,15 +213,15 @@ function Sider(props) {
                 </Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" icon={<IconFont type="iconQQmusic" />} title="QQ 音乐">
-                <Menu.Item key="6">
+                <Menu.Item key="5">
                     <IconFont type="iconmusic_filledx" />
                     <span>音乐馆</span>
                 </Menu.Item>
-                <Menu.Item key="7">
+                <Menu.Item key="6">
                     <VideoCameraOutlined />
                     <span>视频</span>
                 </Menu.Item>
-                <Menu.Item key="8">
+                <Menu.Item key="7">
                     <IconFont type="iconradio" />
                     <span>电台</span>
                 </Menu.Item>

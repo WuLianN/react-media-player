@@ -82,7 +82,6 @@ export function SongList() {
             set_Index(index)
         }
 
-
         return <div className={styles.display}>
             {playlists.length > 0 && playlists.map((item, index) =>
                 <div className={styles.box} key={index} onClick={(e) => goSongList(item, e)}>

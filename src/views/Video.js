@@ -3,20 +3,25 @@ import { useParams, useHistory } from 'react-router-dom'
 import styles from './Video.module.css'
 import api from '../api/wy/index'
 import { LeftOutlined } from '@ant-design/icons'
-
+import { useDispatch } from 'react-redux'
+import { userControlAudio, updateAudioStatus } from '../store/actions'
 
 export default function Video() {
     const { api: API, id } = useParams()
     const [url, setUrl] = useState(null)
     const [mv, setMv] = useState(null)
     const history = useHistory()
+    const dispatch = useDispatch()
 
     const goBack = () => {
         history.goBack()
     }
 
-
     useEffect(() => {
+        // 关停音乐
+        dispatch(updateAudioStatus({ audioStatus: 'pause' }))
+        dispatch(userControlAudio({ userControl: true }))
+
         const getMvUrl = async (id) => {
             const res = await api.getMVurl(id)
             const url = res.data.data.url

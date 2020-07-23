@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useMemo } from "react"
 import api from '../../api/wy/index'
 import './Snippet.css'
 import { useHistory } from "react-router-dom";
@@ -20,6 +20,39 @@ function List(props) {
         history.push(`/songList/${api}/${id}`);
     }
 
+    function MapList(props) {
+        const { list, hasLogin } = props
+        const play = require('../../assets/player/play.png')
+        const [isShowImg, setIsShowImg] = useState(false)
+        const [_index, set_Index] = useState(null)
+
+        useMemo(() => {
+            list.pop()
+        }, [hasLogin])
+
+        const showMask = (bool, index, e) => {
+            e.preventDefault()
+            setIsShowImg(bool)
+            set_Index(index)
+        }
+
+        return list.map((item, index) => {
+            return <div className="recommentlist" key={index} onClick={(e) => goSongList(item, e)}>
+                <img onMouseEnter={(e) => showMask(true, index, e)}
+                    onMouseLeave={(e) => showMask(false, index, e)}
+                    className="recommentlist-img" src={item.picUrl} alt={item.name} />
+                <div className="recommentList-title">{item.name}</div>
+                <div className="recommentList-mark">
+                    <IconFont type="iconerji" />
+                    <span>{snippetNum(item.playCount)}</span>
+                </div>
+                <div style={_index === index && isShowImg ? { display: 'block' } : { display: 'none' }} className="recommentList-mouseMask">
+                    <img className="recommentList-mouseMaskImg" src={play} alt="mark" />
+                </div>
+            </div >
+        })
+    }
+
     const day2cn = {
         '1': '一',
         '2': '二',
@@ -30,7 +63,9 @@ function List(props) {
         '7': '日',
     }
 
-    if (props.recommentList) {
+    const list = props.recommentList
+
+    if (list) {
         // 检查是否登录 -> 获取每日推荐歌曲
         const hasLogin = cookie.getCookie('MUSIC_U')
         if (hasLogin) {
@@ -51,32 +86,10 @@ function List(props) {
                         </div>
                         <div className="recommentList-title">每日推荐歌曲</div>
                     </div>
-                    {props.recommentList.map((item, index) => {
-                        if (index < props.recommentList.length - 1) {
-                            return <div className="recommentlist" key={index} onClick={(e) => goSongList(item, e)}>
-                                <img className="recommentlist-img" src={item.picUrl} alt={item.name} />
-                                <div className="recommentList-title">{item.name}</div>
-                                <div className="recommentList-mark">
-                                    <IconFont type="iconerji" />
-                                    <span>{snippetNum(item.playCount)}</span>
-                                </div>
-                            </div>
-                        }
-
-                    })}
+                    <MapList list={list} hasLogin={hasLogin} />
                 </>)
         }
-
-        return props.recommentList.map((item, index) =>
-            <div className="recommentlist" key={index} onClick={(e) => goSongList(item, e)}>
-                <img className="recommentlist-img" src={item.picUrl} alt={item.name} />
-                <div className="recommentList-title">{item.name}</div>
-                <div className="recommentList-mark">
-                    <IconFont type="iconerji" />
-                    <span>{snippetNum(item.playCount)}</span>
-                </div>
-            </div>
-        )
+        return <MapList list={list} />
     }
 
     return null

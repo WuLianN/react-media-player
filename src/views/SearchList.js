@@ -23,22 +23,22 @@ export default function SearchList() {
         { name: '用户', component: 'User' }
     ]
 
-    function getSearch_WY(word) {
-        const type = 1 // 歌曲
-        const limit = 30 // 30首
-        return api.getSearch(word, type, limit, offset)
-    }
-
-    function getSearch_QQ(word) {
-        const type = 'song'
-        const limit = 30
-        return qqApi.getSearch(word, type, limit, offset)
-    }
-
     useEffect(() => {
         let result = []
         let r1 = []
         let r2 = []
+
+        function getSearch_WY(word) {
+            const type = 1 // 歌曲
+            const limit = 30 // 30首
+            return api.getSearch(word, type, limit, offset)
+        }
+
+        function getSearch_QQ(word) {
+            const type = 'song'
+            const limit = 30
+            return qqApi.getSearch(word, type, limit, offset)
+        }
 
         // 并发
         axios.all([getSearch_QQ(word), getSearch_WY(word)]).then(
@@ -94,7 +94,7 @@ export default function SearchList() {
                 }
             })
         )
-    }, [word, offset])
+    }, [songs, word, offset])
 
     const switchComponent = (component) => {
         if (component === 'Song') {
@@ -111,7 +111,7 @@ export default function SearchList() {
             return <User />
         } else if (component === 'Album') {
             return <Album />
-        }else if (component === 'Lyric') {
+        } else if (component === 'Lyric') {
             return <Lyric />
         }
     }

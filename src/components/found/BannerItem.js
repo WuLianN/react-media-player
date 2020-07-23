@@ -7,7 +7,7 @@ const BannerItem = (props) => {
     const { typeTitle, imageUrl, className, onClick } = props
     return (
         <div className={cn(styles.root, className)} onClick={onClick}>
-            <img className={styles.img} src={imageUrl} loading='lazy' />
+            <img className={styles.img} src={imageUrl} alt="图片" />
             <div className={styles.type}>
                 {typeTitle}
             </div>

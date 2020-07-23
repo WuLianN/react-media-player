@@ -88,18 +88,17 @@ const audioReducer = {
     },
 
     // 更新音乐播放器状态 (audio 播放/暂停)
-    userControlAudio(state = { userControl: '' }, action) {
+    userControlAudio(state = { userControl: false }, action) {
         switch (action.type) {
             case USER_CONTROL_AUDIO.USER:
-                console.log(action.playload)
                 return {
                     state,
-                    userControl: action.playload
+                    userControl: action.playload.userControl
                 }
             case USER_CONTROL_AUDIO.DEFAULT:
                 return {
                     state,
-                    userControl: action.playload
+                    userControl: action.playload.userControl
                 }
             default:
                 return state

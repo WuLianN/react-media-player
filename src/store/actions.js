@@ -54,7 +54,7 @@ export function updateAudioStatus(playload) {
 }
 
 export function userControlAudio(playload) {
-    if (playload.userControlAudio) {
+    if (playload.userControl) {
         return { type: USER_CONTROL_AUDIO.USER, playload }
     } else {
         return { type: USER_CONTROL_AUDIO.DEFAULT, playload }
