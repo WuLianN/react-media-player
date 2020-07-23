@@ -5,8 +5,8 @@ import Found from "../../views/Found"
 import SongList from '../../views/SongList'
 import MoreUserSongList from "../siderbar/MoreUserSongList"
 import SearchList from '../../views/SearchList'
+import Video from '../../views/Video'
 import NoMatch from '../other/NoMatch'
-
 import Header from './Header'
 
 import {
@@ -58,7 +58,11 @@ export default function DashBoard() {
                             <Route path={"/search/:word"}>
                                 <SearchList />
                             </Route>
-                             
+
+                            <Route path={"/video/:api/:id"}>
+                                <Video />
+                            </Route>
+
                             {/* 404 */}
                             <Route>
                                 <NoMatch />

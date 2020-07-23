@@ -48,7 +48,9 @@ const api = {
   loginStatus: `${proxyUrl}/login/status`, // 登录状态
   userDetail: `${proxyUrl}/user/detail`, // 用户详情
   recommentSongs: `${proxyUrl}/recommend/songs`, // 每日推荐歌曲
-  recommentSongList: `${proxyUrl} /recommend/resource` // 每日推荐歌单 
+  recommentSongList: `${proxyUrl}/recommend/resource`, // 每日推荐歌单 
+  recommentMv: `${proxyUrl}/personalized/mv`, // 推荐 mv
+  mvDetail: `${proxyUrl}/mv/detail` //   获取 mv 数据
 }
 
 export const search = api.search
@@ -84,3 +86,5 @@ export const loginStatus = api.loginStatus
 export const userDetail = api.userDetail
 export const recommentSongs = api.recommentSongs
 export const recommentSongList = api.recommentSongList
+export const recommentMv = api.recommentMv
+export const mvDetail = api.mvDetail

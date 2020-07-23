@@ -39,7 +39,9 @@ import {
   loginStatus,
   userDetail,
   recommentSongs,
-  recommentSongList
+  recommentSongList,
+  recommentMv,
+  mvDetail
 } from './source'
 
 export default {
@@ -484,6 +486,26 @@ export default {
   */
   getRecommentSongList() {
     return axios.get(recommentSongList)
+  },
+
+  /**
+  * @description: 推荐mv
+  * @return:
+  */
+  getRecommentMv() {
+    return axios.get(recommentMv)
+  },
+
+  /**
+  * @description: 获取 mv 数据
+  * @return:
+  */
+  getMvDetail(mvid) {
+    return axios.get(mvDetail, {
+      params: {
+        mvid
+      }
+    })
   }
 }
 

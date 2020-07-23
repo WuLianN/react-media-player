@@ -5,8 +5,13 @@ import styles from './History.module.css'
 export default function History() {
     // const [showBack, setShowBack] = useState(false)
     // const [showForword, setShowForward] = useState(false)
-    // const historyLength = window.history.length
-    // console.log(historyLength)
+    const history = window.history
+    // const historyLength = history.length
+
+
+    // window.addEventListener('popstate', () => {
+    //     console.log(history)
+    // })
 
     // useEffect(() => {
     //     if (historyLength > 0) {
@@ -15,15 +20,17 @@ export default function History() {
 
     // }, [historyLength])
 
+
+
     function goBack() {
-        window.history.back()
+        history.back()
 
         // 点击了后退，就可以前进
         // setShowForward(true)
     }
 
     function goForward() {
-        window.history.forward()
+        history.forward()
     }
 
     return <div className={styles.history}>

@@ -1,0 +1,66 @@
+.video {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 600px;
+    background: white;
+    display: flex;
+    flex-flow: row nowrap;
+    z-index: 200;
+    padding: 20px 0 0 25px;
+}
+
+.left {
+    width: 680px;
+    position: relative;
+}
+
+.leftHeader {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.back{
+    width: 25px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.mvLogo{
+    width: 30px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    color: red;
+    border: 1px solid red;
+    margin: 0 5px 0 0;
+}
+
+.name{
+    font-size: 18px;
+    margin: 0 10px 0 0;
+}
+
+.artistName{
+    font-size: 12px;
+    position: relative;
+    left: 0;
+    bottom: -3px;
+}
+
+.player{
+    width: 680px;
+    height: 400px;
+    outline: none;
+}
+
+.right {
+    width: 315px;
+
+}
