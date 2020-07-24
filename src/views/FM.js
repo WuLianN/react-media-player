@@ -3,10 +3,13 @@ import api from '../api/wy/index'
 import { useDispatch } from 'react-redux'
 import { updateSong, updateIdIndex, updateSongList } from '../store/actions'
 import cookie from '../utils/cookie'
+import { Result, Button } from 'antd'
+import { useHistory } from 'react-router-dom'
 
 export default function FM() {
     const dispatch = useDispatch()
     const hasLogin = cookie.getCookie('MUSIC_U')
+    const history = useHistory()
 
     useEffect(() => {
         const getFM = async () => {
@@ -34,5 +37,20 @@ export default function FM() {
             getFM()
         }
     }, [])
+
+    const goBack = () => {
+        history.push('/found')
+    }
+
+    if (!hasLogin) {
+
+        return <Result
+            status="403"
+            title="403"
+            subTitle="需要登录！！！"
+            extra={<Button type="primary" onClick={goBack}>回到首页</Button>}
+        />
+    }
+
     return null
 }

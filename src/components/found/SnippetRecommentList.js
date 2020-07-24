@@ -13,7 +13,6 @@ const IconFont = createFromIconfontCN({
 
 function List(props) {
     let history = useHistory();
-
     function goSongList(item, e) {
         e.preventDefault();
         const { id, api } = item
@@ -25,9 +24,13 @@ function List(props) {
         const play = require('../../assets/player/play.png')
         const [isShowImg, setIsShowImg] = useState(false)
         const [_index, set_Index] = useState(null)
+        const [_list, set_List] = useState(list)
 
         useMemo(() => {
-            list.pop()
+            if (hasLogin) {
+                const sliceList = list.slice(0, 9)
+                set_List(sliceList)
+            }
         }, [hasLogin])
 
         const showMask = (bool, index, e) => {
@@ -36,21 +39,19 @@ function List(props) {
             set_Index(index)
         }
 
-        return list.map((item, index) => {
-            return <div className="recommentlist" key={index} onClick={(e) => goSongList(item, e)}>
-                <img onMouseEnter={(e) => showMask(true, index, e)}
-                    onMouseLeave={(e) => showMask(false, index, e)}
-                    className="recommentlist-img" src={item.picUrl} alt={item.name} />
-                <div className="recommentList-title">{item.name}</div>
-                <div className="recommentList-mark">
-                    <IconFont type="iconerji" />
-                    <span>{snippetNum(item.playCount)}</span>
-                </div>
-                <div style={_index === index && isShowImg ? { display: 'block' } : { display: 'none' }} className="recommentList-mouseMask">
-                    <img className="recommentList-mouseMaskImg" src={play} alt="mark" />
-                </div>
-            </div >
-        })
+        return _list.map((item, index) => <div className="recommentlist" key={index} onClick={(e) => goSongList(item, e)}>
+            <img onMouseEnter={(e) => showMask(true, index, e)}
+                onMouseLeave={(e) => showMask(false, index, e)}
+                className="recommentlist-img" src={item.picUrl} alt={item.name} />
+            <div className="recommentList-title">{item.name}</div>
+            <div className="recommentList-mark">
+                <IconFont type="iconerji" />
+                <span>{snippetNum(item.playCount)}</span>
+            </div>
+            <div style={_index === index && isShowImg ? { display: 'block' } : { display: 'none' }} className="recommentList-mouseMask">
+                <img className="recommentList-mouseMaskImg" src={play} alt="mark" />
+            </div>
+        </div>)
     }
 
     const day2cn = {
@@ -68,6 +69,7 @@ function List(props) {
     if (list) {
         // 检查是否登录 -> 获取每日推荐歌曲
         const hasLogin = cookie.getCookie('MUSIC_U')
+
         if (hasLogin) {
             // 去掉一个 补为 每日推荐
             const day = new Date().getDay()
@@ -88,8 +90,9 @@ function List(props) {
                     </div>
                     <MapList list={list} hasLogin={hasLogin} />
                 </>)
+        } else {
+            return <MapList list={list} hasLogin={hasLogin} />
         }
-        return <MapList list={list} />
     }
 
     return null
@@ -128,3 +131,5 @@ export function SnippetRecommentList() {
     </div>)
 
 }
+
+

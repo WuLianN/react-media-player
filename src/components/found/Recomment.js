@@ -47,8 +47,6 @@ function List() {
 }
 
 export function Recomment() {
-
-
    return (
       <div>
          <Banner />

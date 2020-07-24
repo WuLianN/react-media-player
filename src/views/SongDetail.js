@@ -239,5 +239,3 @@ export default function SongDetail(props) {
 
     </div >
 }
-
-

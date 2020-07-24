@@ -7,6 +7,7 @@ import MoreUserSongList from "../siderbar/MoreUserSongList"
 import SearchList from '../../views/SearchList'
 import Video from '../../views/Video'
 import FM from '../../views/FM'
+import VideoAndMV from '../../views/Video&MV'
 import NoMatch from '../other/NoMatch'
 import Header from './Header'
 
@@ -39,8 +40,8 @@ export default function DashBoard() {
                                 friends
                             </Route>
                             <Route path={"/videos"}>
-                                videos
-                           </Route>
+                                <VideoAndMV />
+                            </Route>
 
                             {/* 歌单 */}
                             <Route path={"/songList/:api/:id"}>
