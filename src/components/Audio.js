@@ -66,13 +66,16 @@ export default function Audio() {
             }
 
             audio.current.onerror = () => {
-                if (audio.current.networkState === 3) { // 3 = NETWORK_NO_SOURCE - 未找到音频/视频来源
-                    console.log('没有音乐资源')
-                    // 要进行判断有没有歌单 -> 播放下一首歌
-                    if (songList.length > 1) {
-                        getNextSong(autoIndex, songList, mode)
-                    } else {
-                        // 弹窗
+                // 是否断网
+                if (!window.navigator.onLine) {
+                    if (audio.current.networkState === 3) { // 3 = NETWORK_NO_SOURCE - 未找到音频/视频来源
+                        console.log('没有音乐资源')
+                        // 要进行判断有没有歌单 -> 播放下一首歌
+                        if (songList.length > 1) {
+                            getNextSong(autoIndex, songList, mode)
+                        } else {
+                            // 弹窗
+                        }
                     }
                 }
 
