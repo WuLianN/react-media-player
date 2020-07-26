@@ -23,7 +23,7 @@
   },
   "scripts": {
     "backend": "node ./NeteaseCloudMusicApi/app",
-    "http-server": "http-server build -p 3002 -o",
+    "http-server": "http-server build -a localhost -p 3002 -o",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

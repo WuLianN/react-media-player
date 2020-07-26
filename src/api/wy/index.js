@@ -36,6 +36,7 @@ import {
   snippetExclusiveVideo,
   exclusiveVideo,
   cellPhoneLogin,
+  logout,
   loginStatus,
   userDetail,
   recommentSongs,
@@ -205,7 +206,8 @@ export default {
     return axios.get(songList, {
       params: {
         id
-      }
+      },
+      withCredentials: true,
     })
   },
 
@@ -450,8 +452,17 @@ export default {
     const timestamp = + new Date()
     return axios.post(cellPhoneLogin + '?timestamp=' + timestamp, {
       phone: data.phone,
-      password: data.password
+      password: data.password,
+      withCredentials: true
     })
+  },
+
+  /**
+  * @description: 退出登录
+  * @return:
+  */
+  logout() {
+    return axios.get(logout)
   },
 
   /**
@@ -459,7 +470,9 @@ export default {
   * @return:
   */
   getLoginStatus() {
-    return axios.get(loginStatus)
+    return axios.get(loginStatus, {
+      withCredentials: true
+    })
   },
 
   /**
@@ -478,7 +491,9 @@ export default {
    * @return:
    */
   getRecommentSongs() {
-    return axios.get(recommentSongs)
+    return axios.get(recommentSongs, {
+      withCredentials: true,
+    })
   },
 
   /**
@@ -514,7 +529,7 @@ export default {
   * @return:
   */
   getFM() {
-    return axios.get(fm)
+    return axios.get(fm, { withCredentials: true })
   }
 }
 

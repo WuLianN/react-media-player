@@ -14,6 +14,8 @@ import {
 
 import { createFromIconfontCN } from '@ant-design/icons';
 import { iconFontUrl } from '../../utils/config'
+import { useHistory } from 'react-router-dom';
+import cookie from '../../utils/cookie';
 const IconFont = createFromIconfontCN({
     scriptUrl: iconFontUrl, // 在 iconfont.cn 上生成
 });
@@ -21,6 +23,7 @@ const IconFont = createFromIconfontCN({
 export default function Profile(props) {
     const { userId: uid } = props.profile
     const [profile, setProfile] = useState(null)
+    const history = useHistory()
 
     useEffect(() => {
         if (uid) {
@@ -29,6 +32,18 @@ export default function Profile(props) {
             })
         }
     }, [uid])
+
+    const logout = (e) => {
+        e.stopPropagation();
+        // 退出登录
+        api.logout()
+        // 清除cookie
+        cookie.setCookie('MUSIC_U', '', -1)
+        cookie.setCookie('__remember_me', '', -1)
+        cookie.setCookie('__csrf', '', -1)
+        // 刷新网页
+        history.go(0)
+    }
 
     if (hasProperty(profile)) {
         const { profile: user, level } = profile
@@ -118,7 +133,7 @@ export default function Profile(props) {
             <div className="popover-footer-box">
                 <div className="popover-footer-box-left">
                     <IconFont type="iconguanji" />
-                    <span className="popover-footer-box-left-text">退出登录</span>
+                    <span onClick={(e) => logout(e)} className="popover-footer-box-left-text">退出登录</span>
                 </div>
             </div>
         </div>
