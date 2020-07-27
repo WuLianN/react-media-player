@@ -244,7 +244,7 @@ export default function Footer() {
 
         return <div onClick={(e) => isShowSongList(e)} className="footer-songListEntrance" >
             <img className="footer-songListEntrance-logo"
-                src={songListLogo} alt="歌单"
+                src={songListLogo} alt="歌单" title="播放列表"
                 style={songList ? { display: 'block' } : { display: 'none' }} />
             <SongList />
         </div>

@@ -139,7 +139,8 @@ export default {
       params: {
         limit,
         offset
-      }
+      },
+      withCredentials: true,
     })
   },
 
