@@ -16,6 +16,11 @@ export const USER_CONTROL_AUDIO = { // 手动控制 音乐播放器状态 （播
     DEFAULT: false
 }
 
+export const USER_CONTROL_PROGRESS = { // 手动控制 进度条
+    USER: true,
+    DEFAULT: false
+}
+
 export const UPDATE_CURRENT_TIME = 'UPDATE_CURRENT_TIME' // 更新歌曲当前进度
 export const UPDATE_SLIDER_TIME = 'UPDATE_SLIDER_TIME' // slider 手动控制 currentTime
 export const UPDATE_VOLUME = 'UPDATE_VOLUME'// 更新音量
@@ -58,6 +63,14 @@ export function userControlAudio(playload) {
         return { type: USER_CONTROL_AUDIO.USER, playload }
     } else {
         return { type: USER_CONTROL_AUDIO.DEFAULT, playload }
+    }
+}
+
+export function userControlProgress(playload) {
+    if (playload.isProgressControl) {
+        return { type: USER_CONTROL_PROGRESS.USER, playload }
+    } else {
+        return { type: USER_CONTROL_PROGRESS.DEFAULT, playload }
     }
 }
 

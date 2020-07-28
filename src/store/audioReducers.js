@@ -9,6 +9,7 @@ import {
     UPDATE_AUTO_INDEX,
     UPDATE_AUDIO_STATUS,
     USER_CONTROL_AUDIO,
+    USER_CONTROL_PROGRESS,
     UPDATE_CURRENT_TIME,
     UPDATE_SLIDER_TIME,
     UPDATE_VOLUME,
@@ -99,6 +100,24 @@ const audioReducer = {
                 return {
                     state,
                     userControl: action.playload.userControl
+                }
+            default:
+                return state
+        }
+    },
+
+    // 用户操作进度条
+    userControlProgress(state = { isProgressControl: false }, action) {
+        switch (action.type) {
+            case USER_CONTROL_PROGRESS.USER:
+                return {
+                    state,
+                    isProgressControl: action.playload.isProgressControl
+                }
+            case USER_CONTROL_PROGRESS.DEFAULT:
+                return {
+                    state,
+                    isProgressControl: action.playload.isProgressControl
                 }
             default:
                 return state

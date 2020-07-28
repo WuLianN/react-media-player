@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef, useMemo } from "react"
 import styles from './SongDetail.module.css'
 import { HeartOutlined, FolderAddOutlined, DownloadOutlined, ShareAltOutlined, ShrinkOutlined, RotateLeftOutlined } from '@ant-design/icons'
 import { getPic } from '../api/config/other'
 import { mapArtist, formatSec, reverseFormatSec } from '../utils/transform'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import api from '../api/wy/index'
 import qqApi from '../api/qq/index'
+import { userControlProgress } from "../store/actions"
 
 export default function SongDetail(props) {
     // 当鼠标置于图片上，isShowImg为true，进入SongDetail，isShowImg被赋值为false，这就导致SongDetail重复渲染。我们等isShowImg为false再渲染
@@ -46,6 +47,9 @@ export default function SongDetail(props) {
         const [start, setStart] = useState(0) // 起始索引
         const [end, setEnd] = useState(start + visialCount) // 结束索引
         const [middle, setMiddle] = useState(Math.floor((start + end) / 2)) // 中间索引
+        const isProgressControl = useSelector(state => state.userControlProgress.isProgressControl)
+        const [cacheProgressControl, setCacheProgressControl] = useState(false)
+        const dispatch = useDispatch()
 
         useEffect(() => {
             const getLyric_WY = async () => {
@@ -105,48 +109,67 @@ export default function SongDetail(props) {
             }
         }, [id])
 
+        useMemo(() => {
+            setCacheProgressControl(isProgressControl)
+        }, [isProgressControl])
+
+
         // 获取currentTime
         const { currentTime } = useSelector(state => state.updateCurrentTime.currentTime)
-
-        const isProgressControl = false // 进度条控制，进度条操控currentTime，还没有实现，先留个口
 
         useEffect(() => {
             if (lyric.length > 0) {
                 const formatSecTime = formatSec(Math.floor(currentTime))
 
-                if (isProgressControl) {
+                if (cacheProgressControl) {
+                    // 恢复默认无人操控进度条
+                    dispatch(userControlProgress({ isProgressControl: false }))
+                }
 
-                } else {
-                    if (middle < lyric.length) {
-                        const floorCurrentTime = Math.floor(currentTime)
-                        const formatTime = reverseFormatSec(lyric[middle].time)
+                if (middle < lyric.length) {
+                    const floorCurrentTime = Math.floor(currentTime)
+                    const formatTime = reverseFormatSec(lyric[middle].time)
 
-                        if (floorCurrentTime > formatTime) {
-                            const _middle = lyric.filter(item => {
-                                const formatTime = reverseFormatSec(item.time)
+                    if (floorCurrentTime > formatTime) {
+                        const _middle = lyric.filter(item => {
+                            const formatTime = reverseFormatSec(item.time)
 
-                                return formatTime > floorCurrentTime
-                            })
+                            return formatTime > floorCurrentTime
+                        })
 
-                            const index = lyric.length - _middle.length - 1
+                        const index = lyric.length - _middle.length - 1
 
-                            const _start = index - Math.floor(visialCount / 2)
-                            setStart(_start)
-                            setEnd(_start + visialCount)
-                            setMiddle(Math.floor((start + end) / 2))
-                        }
+                        const _start = index - Math.floor(visialCount / 2)
+                        setStart(_start)
+                        setEnd(_start + visialCount)
+                        setMiddle(Math.floor((2 * _start + visialCount) / 2))
+                    }
 
-                        if (lyric[middle].time && formatSecTime === lyric[middle].time) {
-                            // 偏移
-                            getScrollTop(itemSize * (middle - 4))
-                            // 更新start、end
-                            setStart((start) => start + 1)
-                            setEnd(start + visialCount)
-                            setMiddle(Math.floor((start + end) / 2))
-                        }
+                    if (floorCurrentTime < formatTime && cacheProgressControl) {
+                        const _middle = lyric.filter(item => {
+                            const formatTime = reverseFormatSec(item.time)
+
+                            return formatTime > floorCurrentTime
+                        })
+                        const index = lyric.length - _middle.length - 1
+                        const _start = index - Math.floor(visialCount / 2)
+
+                        setStart(_start)
+                        setEnd(_start + visialCount)
+                        setMiddle(Math.floor((2 * _start + visialCount) / 2))
+                    }
+
+                    if (lyric[middle].time && formatSecTime === lyric[middle].time) {
+                        // 偏移
+                        getScrollTop(itemSize * (middle - 4))
+                        // 更新start、end
+                        setStart((start) => start + 1)
+                        setEnd(start + visialCount)
+                        setMiddle(Math.floor((start + end) / 2))
                     }
                 }
             }
+
         }, [currentTime, start, end, middle])
 
         function scrollEvent() {

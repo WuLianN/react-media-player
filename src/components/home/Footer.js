@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Footer.css"
 import { useSelector, useDispatch } from 'react-redux'
-import { userControlAudio, updateAudioStatus, updateIdIndex, updateSong, updateVolume, updateMode, updateSongList, updateSlideTime } from "../../store/actions";
+import { userControlAudio, updateAudioStatus, updateIdIndex, updateSong, updateVolume, updateMode, updateSongList, updateSlideTime, userControlProgress } from "../../store/actions";
 import { formatSec, mapArtist } from '../../utils/transform'
 import { Slider } from 'antd';
 import Audio from '../Audio'
@@ -86,6 +86,9 @@ export default function Footer() {
         const dispatch = useDispatch()
 
         function mouseUp(value) {
+            // 用户操控进度条
+            dispatch(userControlProgress({ isProgressControl: true }))
+            // 上报进度
             dispatch(updateSlideTime({ sliderTime: value }))
         }
 
