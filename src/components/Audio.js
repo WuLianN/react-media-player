@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import platform from '../api/config/platform'
 import { updateAutoIndex, updateAudioStatus, userControlAudio, updateCurrentTime, updateSong } from "../store/actions";
 
-function play(id, api, audio) {
-    const source = platform[api](id)
+async function play(id, api, audio) {
+    const source = await platform[api](id)
     console.log(id, source)
     audio.current.src = source
     audio.current.play()
@@ -34,7 +34,7 @@ export default function Audio() {
         if (idIndex >= 0) {
             dispatch(updateAutoIndex({ autoIndex: idIndex }))
         }
-    }, [idIndex])
+    }, [dispatch, idIndex])
 
     useEffect(() => {
         if (audio.current) {
@@ -84,7 +84,7 @@ export default function Audio() {
 
             }
         }
-    }, [autoIndex])
+    }, [autoIndex, dispatch, getNextSong, mode, songList])
 
     // 用户更新进度条的时间
     useEffect(() => {
@@ -117,7 +117,7 @@ export default function Audio() {
             audio.current.pause()
             dispatch(userControlAudio({ userControl: false }))
         }
-    }, [audioStatus])
+    }, [audioStatus, dispatch, userControl])
 
     // 获取下一首 + 播放模式（列表循环、随机播放）
     function getNextSong(autoIndex, songList, mode) {

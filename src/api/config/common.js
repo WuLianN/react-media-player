@@ -6,9 +6,9 @@
  * @LastEditors: Please set LastEditors
  */
 
-const baseUrl = 'https://api.itooi.cn'
+const baseUrl = 'http://localhost:3001' // 使用本地部署的NeteaseCloudMusicApi
 const tencent = `${baseUrl}/tencent`
 const kuwo = `${baseUrl}/kuwo`
-const wangyiyun = `${baseUrl}/netease`
+const wangyiyun = `${baseUrl}`
 
 export { tencent, kuwo, wangyiyun }
