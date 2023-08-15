@@ -55,10 +55,10 @@
 本项目依赖
 npm install / yarn install
 
-api 包依赖
-cd NeteaseCloudMusicApi
+NeteaseCloudMusicApi
+支持 npx 方式运行,会自动安装依赖和运行
 
-npm install / yarn install
+npx NeteaseCloudMusicApi
 ```
 
 <br>

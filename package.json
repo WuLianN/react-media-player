@@ -22,9 +22,9 @@
     "redux": "^4.0.5"
   },
   "scripts": {
-    "backend": "node ./NeteaseCloudMusicApi/app",
+    "backend": "set PORT=3001 && npx NeteaseCloudMusicApi",
     "http-server": "http-server build -a localhost -p 3002 -o",
-    "start": "react-scripts start",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -43,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "NeteaseCloudMusicApi": "^4.9.0"
   }
 }
